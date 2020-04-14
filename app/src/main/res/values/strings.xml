@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Base App</string>
+    <string name="app_name">Minimalistic Launcher</string>
 
     <string name="user_repos_search_hint">Enter developer username</string>
 </resources>
