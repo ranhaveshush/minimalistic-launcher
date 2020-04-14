@@ -1,2 +1,2 @@
-# base-app
-A basic app template.
+# Minimalistic Launcher
+An Android minimalistic launcher.
