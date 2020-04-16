@@ -1,15 +1,11 @@
 package com.ranhaveshush.launcher.minimalistic.util
 
-import com.ranhaveshush.launcher.minimalistic.api.github.GitHubApi
-import com.ranhaveshush.launcher.minimalistic.api.github.GitHubClient
+import android.content.pm.PackageManager
 import com.ranhaveshush.launcher.minimalistic.repository.HomeRepository
 import com.ranhaveshush.launcher.minimalistic.viewmodel.HomeViewModelFactory
 
-object InjectorUtils {
+class InjectorUtils {
+    fun provideHomeViewModelFactory(packageManager: PackageManager) = HomeViewModelFactory(getHomeRepository(packageManager))
 
-    fun provideHomeViewModelFactory() = HomeViewModelFactory(getHomeRepository())
-
-    fun getHomeRepository() = HomeRepository(getGitHubClient())
-
-    private fun getGitHubClient() = GitHubClient(GitHubApi)
+    fun getHomeRepository(packageManager: PackageManager) = HomeRepository(packageManager)
 }

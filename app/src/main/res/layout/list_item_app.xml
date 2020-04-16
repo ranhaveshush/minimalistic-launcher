@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="appItem"
+                type="com.ranhaveshush.launcher.minimalistic.vo.AppItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_appItem"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+                android:id="@+id/imageView_appIcon"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:src="@{appItem.icon}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_launcher_foreground" />
+
+        <TextView
+                android:id="@+id/textView_appName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:text="@{appItem.name}"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView_appIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="App Name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

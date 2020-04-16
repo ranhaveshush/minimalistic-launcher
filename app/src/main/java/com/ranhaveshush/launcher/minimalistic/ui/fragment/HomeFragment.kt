@@ -9,14 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ranhaveshush.launcher.minimalistic.R
 import com.ranhaveshush.launcher.minimalistic.databinding.FragmentHomeBinding
-import com.ranhaveshush.launcher.minimalistic.ui.adapter.RepoAdapter
+import com.ranhaveshush.launcher.minimalistic.ui.adapter.AppsAdapter
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.HomeViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModels {
-        InjectorUtils.provideHomeViewModelFactory()
+        InjectorUtils().provideHomeViewModelFactory(requireContext().packageManager)
     }
 
     override fun onCreateView(
@@ -29,11 +29,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = viewModel
 
-        binding.recyclerViewRepos.adapter = RepoAdapter()
+        binding.recyclerViewApps.adapter = AppsAdapter()
 
-        viewModel.repos.observe(viewLifecycleOwner, Observer {
+        viewModel.apps.observe(viewLifecycleOwner, Observer {
             if (it.state.status == Status.SUCCESS) {
-                (binding.recyclerViewRepos.adapter as RepoAdapter).submitList(it.data)
+                (binding.recyclerViewApps.adapter as AppsAdapter).submitList(it.data)
             }
         })
 

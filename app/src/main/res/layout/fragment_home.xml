@@ -17,55 +17,17 @@
             android:layout_height="match_parent"
             tools:context=".ui.fragment.HomeFragment">
 
-        <EditText
-                android:id="@+id/editText_username"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_standard"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_marginEnd="@dimen/margin_standard"
-                android:hint="@string/user_repos_search_hint"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:text="@={vm.username}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="ranhaveshush" />
-
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView_repos"
+                android:id="@+id/recyclerView_apps"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:isGone="@{vm.repos.state.status != Status.SUCCESS}"
+                app:isGone="@{vm.apps.state.status != Status.SUCCESS}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_username" />
-
-        <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_standard"
-                app:isGone="@{vm.repos.state.status != Status.LOADING}"
-                app:layout_constraintEnd_toEndOf="@id/recyclerView_repos"
-                app:layout_constraintStart_toStartOf="@id/recyclerView_repos"
-                app:layout_constraintTop_toBottomOf="@id/editText_username" />
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_standard"
-                android:layout_marginTop="@dimen/margin_standard"
-                android:layout_marginEnd="@dimen/margin_standard"
-                android:gravity="center_horizontal"
-                android:text="@{vm.repos.state.message}"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                app:isGone="@{vm.repos.state.status != Status.FAILURE}"
-                app:layout_constraintEnd_toEndOf="@id/recyclerView_repos"
-                app:layout_constraintStart_toStartOf="@id/recyclerView_repos"
-                app:layout_constraintTop_toBottomOf="@id/editText_username" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/list_item_app" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
