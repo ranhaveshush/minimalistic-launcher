@@ -4,7 +4,6 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
                 name="appItem"
                 type="com.ranhaveshush.launcher.minimalistic.vo.AppItem" />

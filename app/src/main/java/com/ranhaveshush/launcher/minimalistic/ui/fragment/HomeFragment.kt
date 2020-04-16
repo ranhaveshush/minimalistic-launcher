@@ -9,15 +9,24 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ranhaveshush.launcher.minimalistic.R
 import com.ranhaveshush.launcher.minimalistic.databinding.FragmentHomeBinding
+import com.ranhaveshush.launcher.minimalistic.launcher.AppsLauncher
+import com.ranhaveshush.launcher.minimalistic.launcher.SettingsLauncher
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.AppsAdapter
+import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemClickListener
+import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemLongClickListener
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.HomeViewModel
+import com.ranhaveshush.launcher.minimalistic.vo.AppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home), AppItemClickListener, AppItemLongClickListener {
     private val viewModel: HomeViewModel by viewModels {
         InjectorUtils().provideHomeViewModelFactory(requireContext().packageManager)
     }
+
+    private val appsLauncher = AppsLauncher()
+
+    private val settingsLauncher = SettingsLauncher()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +38,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = viewModel
 
-        binding.recyclerViewApps.adapter = AppsAdapter()
+        binding.recyclerViewApps.adapter = AppsAdapter(this, this)
 
         viewModel.apps.observe(viewLifecycleOwner, Observer {
             if (it.state.status == Status.SUCCESS) {
@@ -38,5 +47,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
 
         return binding.root
+    }
+
+    override fun onAppClick(appItem: AppItem) {
+        appsLauncher.launch(requireActivity().application, appItem.packageName)
+    }
+
+    override fun onAppLongClick(appItem: AppItem): Boolean {
+        return settingsLauncher.launchAppDetails(requireActivity().application, appItem.packageName)
     }
 }
