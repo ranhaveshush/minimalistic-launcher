@@ -21,10 +21,10 @@ class HomeRepository(private val packageManager: PackageManager) {
             val resolveInfoList = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
             val appItems = resolveInfoList.map {
                 val packageName = it.activityInfo.packageName
-                val name = it.loadLabel(packageManager).toString()
+                val name = it.loadLabel(packageManager).toString().capitalize()
                 val icon = it.loadIcon(packageManager)
                 AppItem(packageName, name, icon)
-            }
+            }.sortedBy { it.name }
 
             emit(Resource.success(appItems))
         }
