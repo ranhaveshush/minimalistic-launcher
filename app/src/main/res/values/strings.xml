@@ -3,4 +3,5 @@
 
     <!-- Apps Drawer -->
     <string name="app_search_hint">Apps</string>
+    <string name="app_icon_content_description">App icon</string>
 </resources>

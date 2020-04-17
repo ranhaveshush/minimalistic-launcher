@@ -2,21 +2,20 @@ package com.ranhaveshush.launcher.minimalistic.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ranhaveshush.launcher.minimalistic.databinding.ListItemAppBinding
+import com.ranhaveshush.launcher.minimalistic.databinding.ListItemHomeAppBinding
 import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemClickListener
 import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemLongClickListener
 import com.ranhaveshush.launcher.minimalistic.vo.AppItem
 
-class AppsAdapter(
+class HomeAppsAdapter(
     private val appItemClickListener: AppItemClickListener,
     private val appItemLongClickListener: AppItemLongClickListener
-) : ListAdapter<AppItem, AppViewHolder>(AppDiffCallback()) {
+) : ListAdapter<AppItem, HomeAppViewHolder>(AppItemDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppViewHolder {
-        val binding = ListItemAppBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAppViewHolder {
+        val binding = ListItemHomeAppBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -29,15 +28,15 @@ class AppsAdapter(
             appItemLongClickListener.onAppLongClick(it.tag as AppItem)
         }
 
-        return AppViewHolder(binding)
+        return HomeAppViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AppViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeAppViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }
 
-class AppViewHolder(private val binding: ListItemAppBinding) :
+class HomeAppViewHolder(private val binding: ListItemHomeAppBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: AppItem) {
@@ -47,11 +46,4 @@ class AppViewHolder(private val binding: ListItemAppBinding) :
             executePendingBindings()
         }
     }
-}
-
-class AppDiffCallback : DiffUtil.ItemCallback<AppItem>() {
-
-    override fun areItemsTheSame(oldItem: AppItem, newItem: AppItem) = oldItem.packageName == newItem.packageName
-
-    override fun areContentsTheSame(oldItem: AppItem, newItem: AppItem) = oldItem == newItem
 }

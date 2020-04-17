@@ -26,7 +26,7 @@
                 app:isGone="@{vm.apps.state.status != Status.SUCCESS}"
                 app:layout_constraintBottom_toTopOf="@+id/editText_appSearch"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/list_item_app" />
+                tools:listitem="@layout/list_item_drawer_app" />
 
         <EditText
                 android:id="@+id/editText_appSearch"
