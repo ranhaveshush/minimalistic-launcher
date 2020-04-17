@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
-class HomeRepository(private val packageManager: PackageManager) {
+class AppDrawerRepository(private val packageManager: PackageManager) {
     suspend fun listApps(filter: String = ""): Flow<Resource<List<AppItem>>> = withContext(Dispatchers.Default) {
         flow {
             emit(Resource.loading())

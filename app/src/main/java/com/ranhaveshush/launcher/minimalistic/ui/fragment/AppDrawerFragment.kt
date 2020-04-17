@@ -9,20 +9,20 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ranhaveshush.launcher.minimalistic.R
-import com.ranhaveshush.launcher.minimalistic.databinding.FragmentHomeBinding
+import com.ranhaveshush.launcher.minimalistic.databinding.FragmentAppDrawerBinding
 import com.ranhaveshush.launcher.minimalistic.launcher.AppsLauncher
 import com.ranhaveshush.launcher.minimalistic.launcher.SettingsLauncher
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.AppsAdapter
 import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemClickListener
 import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemLongClickListener
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
-import com.ranhaveshush.launcher.minimalistic.viewmodel.HomeViewModel
+import com.ranhaveshush.launcher.minimalistic.viewmodel.AppDrawerViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.AppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
 
-class HomeFragment : Fragment(R.layout.fragment_home), AppItemClickListener, AppItemLongClickListener {
-    private val viewModel: HomeViewModel by viewModels {
-        InjectorUtils().provideHomeViewModelFactory(requireContext().packageManager)
+class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), AppItemClickListener, AppItemLongClickListener {
+    private val viewModel: AppDrawerViewModel by viewModels {
+        InjectorUtils().provideAppDrawerViewModelFactory(requireContext().packageManager)
     }
 
     private val appsLauncher = AppsLauncher()
@@ -34,7 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), AppItemClickListener, App
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentHomeBinding.inflate(layoutInflater)
+        val binding = FragmentAppDrawerBinding.inflate(layoutInflater)
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = viewModel

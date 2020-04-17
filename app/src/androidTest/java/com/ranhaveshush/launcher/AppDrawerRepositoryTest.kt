@@ -1,7 +1,7 @@
 package com.ranhaveshush.launcher
 
 import androidx.test.platform.app.InstrumentationRegistry
-import com.ranhaveshush.launcher.minimalistic.repository.HomeRepository
+import com.ranhaveshush.launcher.minimalistic.repository.AppDrawerRepository
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.vo.AppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
@@ -16,16 +16,16 @@ import org.junit.Test
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class HomeRepositoryTest {
+class AppDrawerRepositoryTest {
 
-    private lateinit var repository: HomeRepository
+    private lateinit var repository: AppDrawerRepository
 
     @Before
     fun setup() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val packageManager = instrumentation.context.packageManager
 
-        repository = InjectorUtils().getHomeRepository(packageManager)
+        repository = InjectorUtils().getAppDrawerRepository(packageManager)
     }
 
     @Test

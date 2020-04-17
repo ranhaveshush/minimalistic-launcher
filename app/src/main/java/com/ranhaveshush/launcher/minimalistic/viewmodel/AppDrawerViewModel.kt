@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
-import com.ranhaveshush.launcher.minimalistic.repository.HomeRepository
+import com.ranhaveshush.launcher.minimalistic.repository.AppDrawerRepository
 import com.ranhaveshush.launcher.minimalistic.vo.AppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 
-class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
+class AppDrawerViewModel(private val repository: AppDrawerRepository) : ViewModel() {
     val searchQuery = MutableLiveData<String>()
 
     init {

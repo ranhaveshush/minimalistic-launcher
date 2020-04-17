@@ -5,7 +5,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class HomeFragmentTest {
+class AppDrawerFragmentTest {
     @Test
     fun usernameSearchTest() {
 
