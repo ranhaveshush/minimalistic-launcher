@@ -20,6 +20,10 @@ import com.ranhaveshush.launcher.minimalistic.viewmodel.AppDrawerViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
 
+/**
+ * This app drawer fragment represents the all apps screen,
+ * a container for all installed apps.
+ */
 class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemClickListener, DrawerAppItemLongClickListener {
     private val viewModel: AppDrawerViewModel by viewModels {
         InjectorUtils().provideAppDrawerViewModelFactory(packageManager)

@@ -19,6 +19,10 @@ import com.ranhaveshush.launcher.minimalistic.viewmodel.HomeViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.HomeAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 
+/**
+ * This home fragment represents the home screen,
+ * a container for the favorite fast access apps.
+ */
 class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener, HomeAppItemLongClickListener {
     private val viewModel: HomeViewModel by viewModels {
         InjectorUtils().provideHomeViewModelFactory(packageManager)

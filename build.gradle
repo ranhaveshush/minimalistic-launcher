@@ -41,8 +41,10 @@ allprojects {
     ext.version_kotlinx_coroutines = '1.2.1'
 
     // AndroidX
+    ext.version_legacy = '1.0.0'
     ext.version_appcompat = '1.2.0-beta01'
     ext.version_constraintlayout = '2.0.0-beta4'
+    ext.version_viewpager2 = '1.0.0'
     ext.version_lifecycle = '2.2.0'
     ext.version_navigation = '2.3.0-alpha04'
 

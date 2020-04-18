@@ -3,7 +3,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/nav_graph"
-        app:startDestination="@id/home_fragment">
+        app:startDestination="@id/main_fragment">
+
+    <fragment
+            android:id="@+id/main_fragment"
+            android:name="com.ranhaveshush.launcher.minimalistic.ui.fragment.MainFragment"
+            android:label="Main"
+            tools:layout="@layout/fragment_main" />
 
     <fragment
             android:id="@+id/home_fragment"
