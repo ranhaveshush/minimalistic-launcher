@@ -2,7 +2,7 @@ package com.ranhaveshush.launcher.minimalistic.repository
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import com.ranhaveshush.launcher.minimalistic.vo.AppItem
+import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 
 class AppDrawerRepository(private val packageManager: PackageManager) {
-    suspend fun listApps(filter: String = ""): Flow<Resource<List<AppItem>>> = withContext(Dispatchers.Default) {
+    suspend fun listApps(filter: String = ""): Flow<Resource<List<DrawerAppItem>>> = withContext(Dispatchers.Default) {
         flow {
             emit(Resource.loading())
 
@@ -24,7 +24,7 @@ class AppDrawerRepository(private val packageManager: PackageManager) {
                 val icon = it.loadIcon(packageManager)
                 val label = it.loadLabel(packageManager).toString().capitalize()
                 val name = label.toLowerCase()
-                AppItem(packageName, name, label, icon)
+                DrawerAppItem(packageName, name, label, icon)
             }
 
             val normalizedFilter = filter.toLowerCase()

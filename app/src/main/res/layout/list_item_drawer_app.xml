@@ -6,8 +6,8 @@
     <data>
 
         <variable
-                name="appItem"
-                type="com.ranhaveshush.launcher.minimalistic.vo.AppItem" />
+                name="app"
+                type="com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,8 +24,8 @@
                 android:id="@+id/imageView_appIcon"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
-                android:src="@{appItem.icon}"
                 android:contentDescription="@string/app_icon_content_description"
+                android:src="@{app.icon}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_standard"
-                android:text="@{appItem.label}"
+                android:text="@{app.label}"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView_appIcon"

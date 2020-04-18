@@ -2,17 +2,18 @@ package com.ranhaveshush.launcher.minimalistic.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ranhaveshush.launcher.minimalistic.databinding.ListItemHomeAppBinding
-import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemClickListener
-import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemLongClickListener
-import com.ranhaveshush.launcher.minimalistic.vo.AppItem
+import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemClickListener
+import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemLongClickListener
+import com.ranhaveshush.launcher.minimalistic.vo.HomeAppItem
 
 class HomeAppsAdapter(
-    private val appItemClickListener: AppItemClickListener,
-    private val appItemLongClickListener: AppItemLongClickListener
-) : ListAdapter<AppItem, HomeAppViewHolder>(AppItemDiffCallback()) {
+    private val appItemClickListener: HomeAppItemClickListener,
+    private val appItemLongClickListener: HomeAppItemLongClickListener
+) : ListAdapter<HomeAppItem, HomeAppViewHolder>(HomeAppItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAppViewHolder {
         val binding = ListItemHomeAppBinding.inflate(
@@ -22,10 +23,10 @@ class HomeAppsAdapter(
         )
 
         binding.root.setOnClickListener {
-            appItemClickListener.onAppClick(it.tag as AppItem)
+            appItemClickListener.onAppClick(it.tag as HomeAppItem)
         }
         binding.root.setOnLongClickListener {
-            appItemLongClickListener.onAppLongClick(it.tag as AppItem)
+            appItemLongClickListener.onAppLongClick(it.tag as HomeAppItem)
         }
 
         return HomeAppViewHolder(binding)
@@ -39,11 +40,18 @@ class HomeAppsAdapter(
 class HomeAppViewHolder(private val binding: ListItemHomeAppBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: AppItem) {
+    fun bind(item: HomeAppItem) {
         binding.root.tag = item
         binding.apply {
-            appItem = item
+            app = item
             executePendingBindings()
         }
     }
+}
+
+class HomeAppItemDiffCallback : DiffUtil.ItemCallback<HomeAppItem>() {
+
+    override fun areItemsTheSame(oldItem: HomeAppItem, newItem: HomeAppItem) = oldItem.packageName == newItem.packageName
+
+    override fun areContentsTheSame(oldItem: HomeAppItem, newItem: HomeAppItem) = oldItem == newItem
 }

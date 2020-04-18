@@ -7,7 +7,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.ranhaveshush.launcher.minimalistic.repository.AppDrawerRepository
-import com.ranhaveshush.launcher.minimalistic.vo.AppItem
+import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 
 class AppDrawerViewModel(private val repository: AppDrawerRepository) : ViewModel() {
@@ -17,11 +17,11 @@ class AppDrawerViewModel(private val repository: AppDrawerRepository) : ViewMode
         searchQuery.value = ""
     }
 
-    val apps: LiveData<Resource<List<AppItem>>> = searchQuery.switchMap {
+    val apps: LiveData<Resource<List<DrawerAppItem>>> = searchQuery.switchMap {
         listApps(it)
     }
 
-    private fun listApps(searchQuery: String): LiveData<Resource<List<AppItem>>> = liveData {
+    private fun listApps(searchQuery: String): LiveData<Resource<List<DrawerAppItem>>> = liveData {
         emitSource(repository.listApps(searchQuery).asLiveData())
     }
 }

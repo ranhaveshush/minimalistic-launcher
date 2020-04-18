@@ -6,8 +6,8 @@
     <data>
 
         <variable
-                name="appItem"
-                type="com.ranhaveshush.launcher.minimalistic.vo.AppItem" />
+                name="app"
+                type="com.ranhaveshush.launcher.minimalistic.vo.HomeAppItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="@{appItem.label}"
+                android:text="@{app.label}"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/colorAccent"
                 android:textSize="32sp"

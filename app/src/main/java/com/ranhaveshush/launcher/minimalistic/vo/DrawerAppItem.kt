@@ -2,9 +2,12 @@ package com.ranhaveshush.launcher.minimalistic.vo
 
 import android.graphics.drawable.Drawable
 
-data class AppItem(
+/**
+ * A home screen app [ValueObject].
+ */
+data class DrawerAppItem(
     val packageName: String,
     val name: String,
     val label: String,
     val icon: Drawable
-)
+) : ValueObject

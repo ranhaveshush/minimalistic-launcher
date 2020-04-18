@@ -13,14 +13,14 @@ import com.ranhaveshush.launcher.minimalistic.databinding.FragmentAppDrawerBindi
 import com.ranhaveshush.launcher.minimalistic.launcher.AppsLauncher
 import com.ranhaveshush.launcher.minimalistic.launcher.SettingsLauncher
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.DrawerAppsAdapter
-import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemClickListener
-import com.ranhaveshush.launcher.minimalistic.ui.listener.AppItemLongClickListener
+import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemClickListener
+import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemLongClickListener
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.AppDrawerViewModel
-import com.ranhaveshush.launcher.minimalistic.vo.AppItem
+import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
 
-class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), AppItemClickListener, AppItemLongClickListener {
+class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemClickListener, DrawerAppItemLongClickListener {
     private val viewModel: AppDrawerViewModel by viewModels {
         InjectorUtils().provideAppDrawerViewModelFactory(packageManager)
     }
@@ -53,7 +53,7 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), AppItemClickLi
         return binding.root
     }
 
-    override fun onAppClick(appItem: AppItem) = appsLauncher.launch(application, appItem.packageName)
+    override fun onAppClick(appItem: DrawerAppItem) = appsLauncher.launch(application, appItem.packageName)
 
-    override fun onAppLongClick(appItem: AppItem) = settingsLauncher.launchAppDetails(application, appItem.packageName)
+    override fun onAppLongClick(appItem: DrawerAppItem) = settingsLauncher.launchAppDetails(application, appItem.packageName)
 }
