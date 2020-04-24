@@ -3,7 +3,7 @@ package com.ranhaveshush.launcher
 import androidx.test.platform.app.InstrumentationRegistry
 import com.ranhaveshush.launcher.minimalistic.repository.AppDrawerRepository
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
-import com.ranhaveshush.launcher.minimalistic.vo.AppItem
+import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -25,13 +25,13 @@ class AppDrawerRepositoryTest {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val packageManager = instrumentation.context.packageManager
 
-        repository = InjectorUtils().getAppDrawerRepository(packageManager)
+        repository = InjectorUtils().provideAppDrawerRepository(packageManager)
     }
 
     @Test
     @ExperimentalCoroutinesApi
     fun listApps_isNotNullOrEmpty() = runBlocking {
-        var apps: List<AppItem>? = null
+        var apps: List<DrawerAppItem>? = null
 
         repository.listApps().collect { resource ->
             if (resource.state == Resource.State.SUCCESS) {

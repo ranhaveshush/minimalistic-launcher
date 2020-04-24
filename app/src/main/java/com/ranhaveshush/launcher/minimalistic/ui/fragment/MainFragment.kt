@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val pages = listOf(
+            NotificationFragment(),
             HomeFragment(),
             AppDrawerFragment()
         )

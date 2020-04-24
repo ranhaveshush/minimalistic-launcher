@@ -51,6 +51,10 @@ dependencies {
     // AndroidX navigation
     implementation "androidx.navigation:navigation-fragment-ktx:${version_navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${version_navigation}"
+    // AndroidX Room
+    implementation "androidx.room:room-runtime:${version_room}"
+    implementation "androidx.room:room-ktx:${version_room}"
+    kapt "androidx.room:room-compiler:${version_room}"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${version_retrofit}"
     implementation "com.squareup.retrofit2:converter-moshi:${version_retrofit}"
