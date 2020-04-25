@@ -28,6 +28,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
         InjectorUtils().provideHomeViewModelFactory(packageManager)
     }
 
+    private val appsAdapter = HomeAppsAdapter(this, this)
+
     private val appsLauncher = AppsLauncher()
 
     private val settingsLauncher = SettingsLauncher()
@@ -42,11 +44,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = viewModel
 
-        binding.recyclerViewApps.adapter = HomeAppsAdapter(this, this)
+        binding.recyclerViewApps.adapter = appsAdapter
 
         viewModel.apps.observe(viewLifecycleOwner, Observer {
             if (it.state.status == Resource.Status.SUCCESS) {
-                (binding.recyclerViewApps.adapter as HomeAppsAdapter).submitList(it.data)
+                appsAdapter.submitList(it.data)
             }
         })
 

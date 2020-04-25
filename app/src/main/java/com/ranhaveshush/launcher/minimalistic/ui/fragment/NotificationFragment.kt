@@ -21,6 +21,8 @@ class NotificationFragment : Fragment(R.layout.fragment_notifications) {
         InjectorUtils().provideNotificationViewModelFactory(requireContext().applicationContext)
     }
 
+    private val notificationsAdapter = NotificationsAdapter()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentNotificationsBinding.inflate(inflater)
 
@@ -43,10 +45,10 @@ class NotificationFragment : Fragment(R.layout.fragment_notifications) {
             NotificationManagerCompat.from(context).notify(0, notification)
         }
 
-        binding.recyclerViewNotifications.adapter = NotificationsAdapter()
+        binding.recyclerViewNotifications.adapter = notificationsAdapter
 
         viewModel.notifications.observe(viewLifecycleOwner, Observer {
-            (binding.recyclerViewNotifications.adapter as NotificationsAdapter).submitList(it)
+            notificationsAdapter.submitList(it)
         })
 
         return binding.root
