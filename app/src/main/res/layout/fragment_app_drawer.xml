@@ -20,9 +20,8 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView_apps"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:paddingBottom="70dp"
+                android:layout_height="0dp"
+                android:overScrollMode="never"
                 app:isGone="@{vm.apps.state.status != Status.SUCCESS}"
                 app:layout_constraintBottom_toTopOf="@+id/editText_appSearch"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +45,8 @@
                 android:text="@={vm.searchQuery}"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorAccent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView_apps" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

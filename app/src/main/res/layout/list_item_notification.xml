@@ -21,6 +21,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:contentDescription="@string/app_icon_content_description"
+                android:padding="@dimen/padding_small"
                 android:src="@{notification.appIcon}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
