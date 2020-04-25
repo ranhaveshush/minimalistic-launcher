@@ -13,6 +13,7 @@ class AppsLauncher {
     fun launch(context: Application, packageName: String) {
         val intent = Intent(Intent.ACTION_MAIN).apply {
             `package` = packageName
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
 
         if (intent.resolveActivity(context.packageManager) != null) {
