@@ -19,6 +19,7 @@ import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.AppDrawerViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
+import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 /**
  * This app drawer fragment represents the all apps screen,
@@ -28,6 +29,8 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
     private val viewModel: AppDrawerViewModel by viewModels {
         InjectorUtils().provideAppDrawerViewModelFactory(packageManager)
     }
+
+    private val appsAdapter = DrawerAppsAdapter(this, this)
 
     private val appsLauncher = AppsLauncher()
 
@@ -43,18 +46,24 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
         binding.lifecycleOwner = viewLifecycleOwner
         binding.vm = viewModel
 
-        binding.recyclerViewApps.adapter = DrawerAppsAdapter(this, this)
+        binding.recyclerViewApps.adapter = appsAdapter
         binding.recyclerViewApps.layoutManager = LinearLayoutManager(context).apply {
             stackFromEnd = true
         }
 
         viewModel.apps.observe(viewLifecycleOwner, Observer {
             if (it.state.status == Status.SUCCESS) {
-                (binding.recyclerViewApps.adapter as DrawerAppsAdapter).submitList(it.data)
+                appsAdapter.submitList(it.data)
             }
         })
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        recyclerView_apps.smoothScrollToPosition(0)
     }
 
     override fun onAppClick(appItem: DrawerAppItem) = appsLauncher.launch(application, appItem.packageName)
