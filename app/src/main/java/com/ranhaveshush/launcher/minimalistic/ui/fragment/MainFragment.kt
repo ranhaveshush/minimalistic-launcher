@@ -20,5 +20,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         )
 
         viewPager.adapter = MainFragmentAdapter(requireActivity(), pages)
+        viewPager.currentItem = 1
+        viewPager.offscreenPageLimit = 1
     }
 }
