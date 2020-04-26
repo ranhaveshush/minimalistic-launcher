@@ -11,8 +11,8 @@ import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemLongClickLi
 import com.ranhaveshush.launcher.minimalistic.vo.HomeAppItem
 
 class HomeAppsAdapter(
-    private val appItemClickListener: HomeAppItemClickListener,
-    private val appItemLongClickListener: HomeAppItemLongClickListener
+    private val itemClickListener: HomeAppItemClickListener,
+    private val itemLongClickListener: HomeAppItemLongClickListener
 ) : ListAdapter<HomeAppItem, HomeAppViewHolder>(HomeAppItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAppViewHolder {
@@ -23,10 +23,10 @@ class HomeAppsAdapter(
         )
 
         binding.root.setOnClickListener {
-            appItemClickListener.onAppClick(it.tag as HomeAppItem)
+            itemClickListener.onAppClick(it.tag as HomeAppItem)
         }
         binding.root.setOnLongClickListener {
-            appItemLongClickListener.onAppLongClick(it.tag as HomeAppItem)
+            itemLongClickListener.onAppLongClick(it.tag as HomeAppItem)
         }
 
         return HomeAppViewHolder(binding)
@@ -41,8 +41,8 @@ class HomeAppViewHolder(private val binding: ListItemHomeAppBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: HomeAppItem) {
-        binding.root.tag = item
         binding.apply {
+            root.tag = item
             app = item
             executePendingBindings()
         }

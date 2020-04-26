@@ -1,21 +1,27 @@
 package com.ranhaveshush.launcher.minimalistic.vo
 
+import android.app.PendingIntent
 import android.graphics.drawable.Drawable
 
 /**
  * A notification [ValueObject].
  */
 data class NotificationItem(
-    val id: Int,
+    val key: String,
     val packageName: String,
     val appIcon: Drawable,
     val appLabel: String,
-    val postedAt: NotificationTime,
+    val postTime: NotificationTime,
     val title: String,
-    val text: String
+    val text: String,
+    val contentIntent: PendingIntent?,
+    val deleteIntent: PendingIntent?
 ) : ValueObject
 
-data class NotificationTime(private val time: Long) {
+/**
+ * A notification time representation.
+ */
+data class NotificationTime(private val time: Long) : Comparable<NotificationTime> {
     val value: String
         get() = toString()
 
@@ -34,4 +40,6 @@ data class NotificationTime(private val time: Long) {
         val months = weeks / 4
         return if (months == 0L) "${weeks}w" else "ages"
     }
+
+    override fun compareTo(other: NotificationTime): Int = time.compareTo(other.time)
 }

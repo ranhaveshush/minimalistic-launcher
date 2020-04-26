@@ -24,7 +24,7 @@ allprojects {
     ext.version_name = "1.0.0"
 
     // Android SDK
-    ext.version_min_sdk = 19
+    ext.version_min_sdk = 20
     ext.version_target_sdk = 28
     ext.version_compile_sdk = 28
 

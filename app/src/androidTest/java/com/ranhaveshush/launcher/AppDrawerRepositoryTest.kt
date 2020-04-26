@@ -25,7 +25,7 @@ class AppDrawerRepositoryTest {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val packageManager = instrumentation.context.packageManager
 
-        repository = InjectorUtils().provideAppDrawerRepository(packageManager)
+        repository = InjectorUtils.provideAppDrawerRepository(packageManager)
     }
 
     @Test

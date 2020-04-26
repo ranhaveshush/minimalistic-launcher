@@ -1,15 +1,25 @@
 package com.ranhaveshush.launcher.minimalistic.repository
 
-import com.ranhaveshush.launcher.minimalistic.db.notification.NotificationDao
-import com.ranhaveshush.launcher.minimalistic.db.notification.adapt
+import android.content.Context
+import com.ranhaveshush.launcher.minimalistic.cache.NotificationCache
+import com.ranhaveshush.launcher.minimalistic.cache.NotificationTransformer
 import com.ranhaveshush.launcher.minimalistic.vo.NotificationItem
+import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class NotificationRepository(private val notificationDao: NotificationDao) : NotificationDao by notificationDao {
-    fun getAllNotifications(): Flow<List<NotificationItem>> = notificationDao.getAll().map {
-        it.map { notificationEntity ->
-            notificationEntity.adapt()
+class NotificationRepository(
+    private val context: Context,
+    private val notificationCache: NotificationCache,
+    private val notificationTransformer: NotificationTransformer
+) : NotificationCache by notificationCache {
+    fun getAllNotifications(): Flow<Resource<List<NotificationItem>>> = notificationCache.asFlow().map {
+        val notifications = it.map { sbn ->
+            notificationTransformer.transform(context, sbn)
+        }.sortedBy { notificationItem ->
+            notificationItem.postTime
         }
+
+        Resource.success(notifications)
     }
 }

@@ -13,15 +13,18 @@ import androidx.lifecycle.Observer
 import com.ranhaveshush.launcher.minimalistic.R
 import com.ranhaveshush.launcher.minimalistic.databinding.FragmentNotificationsBinding
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.NotificationsAdapter
+import com.ranhaveshush.launcher.minimalistic.ui.listener.NotificationItemClickListener
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.NotificationViewModel
+import com.ranhaveshush.launcher.minimalistic.vo.NotificationItem
+import com.ranhaveshush.launcher.minimalistic.vo.Resource
 
-class NotificationFragment : Fragment(R.layout.fragment_notifications) {
+class NotificationFragment : Fragment(R.layout.fragment_notifications), NotificationItemClickListener {
     private val viewModel: NotificationViewModel by viewModels {
-        InjectorUtils().provideNotificationViewModelFactory(requireContext().applicationContext)
+        InjectorUtils.provideNotificationViewModelFactory(requireContext().applicationContext)
     }
 
-    private val notificationsAdapter = NotificationsAdapter()
+    private val notificationsAdapter = NotificationsAdapter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentNotificationsBinding.inflate(inflater)
@@ -42,15 +45,19 @@ class NotificationFragment : Fragment(R.layout.fragment_notifications) {
                 .setTimeoutAfter(System.currentTimeMillis() + 10000)
                 .build()
 
-            NotificationManagerCompat.from(context).notify(0, notification)
+            NotificationManagerCompat.from(context).notify(12345, notification)
         }
 
         binding.recyclerViewNotifications.adapter = notificationsAdapter
 
         viewModel.notifications.observe(viewLifecycleOwner, Observer {
-            notificationsAdapter.submitList(it)
+            if (it.state.status == Resource.Status.SUCCESS) {
+                notificationsAdapter.submitList(it.data)
+            }
         })
 
         return binding.root
     }
+
+    override fun onNotificationClick(notificationItem: NotificationItem) = viewModel.launch(notificationItem)
 }

@@ -10,8 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ranhaveshush.launcher.minimalistic.R
 import com.ranhaveshush.launcher.minimalistic.databinding.FragmentAppDrawerBinding
-import com.ranhaveshush.launcher.minimalistic.launcher.AppsLauncher
-import com.ranhaveshush.launcher.minimalistic.launcher.SettingsLauncher
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.DrawerAppsAdapter
 import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemClickListener
 import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemLongClickListener
@@ -27,14 +25,10 @@ import kotlinx.android.synthetic.main.fragment_app_drawer.*
  */
 class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemClickListener, DrawerAppItemLongClickListener {
     private val viewModel: AppDrawerViewModel by viewModels {
-        InjectorUtils().provideAppDrawerViewModelFactory(packageManager)
+        InjectorUtils.provideAppDrawerViewModelFactory(packageManager)
     }
 
     private val appsAdapter = DrawerAppsAdapter(this, this)
-
-    private val appsLauncher = AppsLauncher()
-
-    private val settingsLauncher = SettingsLauncher()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +60,7 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
         recyclerView_apps.smoothScrollToPosition(0)
     }
 
-    override fun onAppClick(appItem: DrawerAppItem) = appsLauncher.launch(application, appItem.packageName)
+    override fun onAppClick(appItem: DrawerAppItem) = viewModel.launch(application, appItem.packageName)
 
-    override fun onAppLongClick(appItem: DrawerAppItem) = settingsLauncher.launchAppDetails(application, appItem.packageName)
+    override fun onAppLongClick(appItem: DrawerAppItem) = viewModel.launchAppDetails(application, appItem.packageName)
 }

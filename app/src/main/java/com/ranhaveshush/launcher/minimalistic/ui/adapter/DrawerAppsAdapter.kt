@@ -11,8 +11,8 @@ import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemLongClick
 import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
 
 class DrawerAppsAdapter(
-    private val appItemClickListener: DrawerAppItemClickListener,
-    private val appItemLongClickListener: DrawerAppItemLongClickListener
+    private val itemClickListener: DrawerAppItemClickListener,
+    private val itemLongClickListener: DrawerAppItemLongClickListener
 ) : ListAdapter<DrawerAppItem, DrawerAppViewHolder>(DrawerAppItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrawerAppViewHolder {
@@ -23,10 +23,10 @@ class DrawerAppsAdapter(
         )
 
         binding.root.setOnClickListener {
-            appItemClickListener.onAppClick(it.tag as DrawerAppItem)
+            itemClickListener.onAppClick(it.tag as DrawerAppItem)
         }
         binding.root.setOnLongClickListener {
-            appItemLongClickListener.onAppLongClick(it.tag as DrawerAppItem)
+            itemLongClickListener.onAppLongClick(it.tag as DrawerAppItem)
         }
 
         return DrawerAppViewHolder(binding)
@@ -41,8 +41,8 @@ class DrawerAppViewHolder(private val binding: ListItemDrawerAppBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: DrawerAppItem) {
-        binding.root.tag = item
         binding.apply {
+            root.tag = item
             app = item
             executePendingBindings()
         }
