@@ -15,7 +15,7 @@ class AppDrawerRepository(private val packageManager: PackageManager) {
             addCategory(Intent.CATEGORY_LAUNCHER)
         }
 
-        val resolveInfoList = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+        val resolveInfoList = packageManager.queryIntentActivities(intent, 0)
         val appItems = resolveInfoList.map {
             val packageName = it.activityInfo.packageName
             val icon = it.loadIcon(packageManager)
