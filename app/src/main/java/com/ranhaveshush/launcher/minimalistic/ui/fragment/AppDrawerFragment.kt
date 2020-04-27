@@ -48,16 +48,11 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
         viewModel.apps.observe(viewLifecycleOwner, Observer {
             if (it.state.status == Status.SUCCESS) {
                 appsAdapter.submitList(it.data)
+                recyclerView_apps.smoothScrollToPosition(0)
             }
         })
 
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        recyclerView_apps.smoothScrollToPosition(0)
     }
 
     override fun onAppClick(appItem: DrawerAppItem) = viewModel.launch(application, appItem.packageName)
