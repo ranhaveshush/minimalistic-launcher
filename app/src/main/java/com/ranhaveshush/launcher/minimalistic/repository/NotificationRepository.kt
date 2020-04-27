@@ -16,7 +16,7 @@ class NotificationRepository(
     fun getAllNotifications(): Flow<Resource<List<NotificationItem>>> = notificationCache.asFlow().map {
         val notifications = it.map { sbn ->
             notificationTransformer.transform(context, sbn)
-        }.sortedBy { notificationItem ->
+        }.sortedByDescending { notificationItem ->
             notificationItem.postTime
         }
 
