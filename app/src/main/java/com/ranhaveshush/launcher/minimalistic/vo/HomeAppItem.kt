@@ -5,6 +5,7 @@ package com.ranhaveshush.launcher.minimalistic.vo
  */
 data class HomeAppItem(
     val packageName: String,
+    val activityName: String,
     val name: String,
     val label: String
 ) : ValueObject

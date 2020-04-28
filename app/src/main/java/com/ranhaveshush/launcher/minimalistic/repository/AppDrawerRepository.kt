@@ -18,10 +18,11 @@ class AppDrawerRepository(private val packageManager: PackageManager) {
         val resolveInfoList = packageManager.queryIntentActivities(intent, 0)
         val appItems = resolveInfoList.map {
             val packageName = it.activityInfo.packageName
-            val icon = it.loadIcon(packageManager)
+            val activityName = it.activityInfo.name
             val label = it.loadLabel(packageManager).toString().capitalize()
             val name = label.toLowerCase()
-            DrawerAppItem(packageName, name, label, icon)
+            val icon = it.loadIcon(packageManager)
+            DrawerAppItem(packageName, activityName, name, label, icon)
         }
 
         val normalizedFilter = filter.toLowerCase()

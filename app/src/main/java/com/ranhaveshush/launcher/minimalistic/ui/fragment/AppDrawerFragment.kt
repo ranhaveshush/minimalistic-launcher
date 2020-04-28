@@ -1,5 +1,6 @@
 package com.ranhaveshush.launcher.minimalistic.ui.fragment
 
+import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,7 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
         return binding.root
     }
 
-    override fun onAppClick(appItem: DrawerAppItem) = viewModel.launch(application, appItem.packageName)
+    override fun onAppClick(appItem: DrawerAppItem) = viewModel.launch(application, ComponentName(appItem.packageName, appItem.activityName))
 
     override fun onAppLongClick(appItem: DrawerAppItem) = viewModel.launchAppDetails(application, appItem.packageName)
 }

@@ -18,9 +18,10 @@ class HomeRepository(private val packageManager: PackageManager) {
         val resolveInfoList = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
         val appItems = resolveInfoList.map {
             val packageName = it.activityInfo.packageName
+            val activityName = it.activityInfo.name
             val label = it.loadLabel(packageManager).toString().capitalize()
             val name = label.toLowerCase()
-            HomeAppItem(packageName, name, label)
+            HomeAppItem(packageName, activityName, name, label)
         }
 
         val filteredAppItems = appItems.subList(0, 7)

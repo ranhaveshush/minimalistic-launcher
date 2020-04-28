@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
  */
 data class DrawerAppItem(
     val packageName: String,
+    val activityName: String,
     val name: String,
     val label: String,
     val icon: Drawable

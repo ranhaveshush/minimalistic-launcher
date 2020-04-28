@@ -1,5 +1,6 @@
 package com.ranhaveshush.launcher.minimalistic.ui.fragment
 
+import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +49,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
         return binding.root
     }
 
-    override fun onAppClick(appItem: HomeAppItem) = viewModel.launch(application, appItem.packageName)
+    override fun onAppClick(appItem: HomeAppItem) = viewModel.launch(application, ComponentName(appItem.packageName, appItem.activityName))
 
     override fun onAppLongClick(appItem: HomeAppItem) = viewModel.launchAppDetails(application, appItem.packageName)
 }

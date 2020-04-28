@@ -1,13 +1,14 @@
 package com.ranhaveshush.launcher.minimalistic.launcher
 
 import android.app.Application
+import android.content.ComponentName
 
 /**
  * An app launcher.
  */
 interface AppsLauncher {
     /**
-     * Launches an App with the given [packageName].
+     * Launches an App with the given [ComponentName].
      */
-    fun launch(context: Application, packageName: String)
+    fun launch(context: Application, componentName: ComponentName)
 }
