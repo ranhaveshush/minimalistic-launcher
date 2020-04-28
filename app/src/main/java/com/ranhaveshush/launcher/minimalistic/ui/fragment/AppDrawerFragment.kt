@@ -56,7 +56,10 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
         return binding.root
     }
 
-    override fun onAppClick(appItem: DrawerAppItem) = viewModel.launch(application, ComponentName(appItem.packageName, appItem.activityName))
+    override fun onAppClick(appItem: DrawerAppItem) {
+        val componentName = ComponentName(appItem.packageName, appItem.activityName)
+        viewModel.launch(application, componentName)
+    }
 
     override fun onAppLongClick(appItem: DrawerAppItem) = viewModel.launchAppDetails(application, appItem.packageName)
 }

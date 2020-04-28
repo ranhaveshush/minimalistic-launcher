@@ -9,6 +9,8 @@ import android.content.ComponentName
 interface AppsLauncher {
     /**
      * Launches an App with the given [ComponentName].
+     *
+     * @return true in case the launch was successful, otherwise false.
      */
-    fun launch(context: Application, componentName: ComponentName)
+    fun launch(context: Application, componentName: ComponentName): Boolean
 }

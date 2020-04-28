@@ -40,6 +40,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
 
         binding.recyclerViewApps.adapter = appsAdapter
 
+        binding.root.setOnLongClickListener {
+            viewModel.launchWallpaperChooser(application)
+        }
+
         viewModel.apps.observe(viewLifecycleOwner, Observer {
             if (it.state.status == Resource.Status.SUCCESS) {
                 appsAdapter.submitList(it.data)
@@ -49,7 +53,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
         return binding.root
     }
 
-    override fun onAppClick(appItem: HomeAppItem) = viewModel.launch(application, ComponentName(appItem.packageName, appItem.activityName))
+    override fun onAppClick(appItem: HomeAppItem) {
+        val componentName = ComponentName(appItem.packageName, appItem.activityName)
+        viewModel.launch(application, componentName)
+    }
 
     override fun onAppLongClick(appItem: HomeAppItem) = viewModel.launchAppDetails(application, appItem.packageName)
 }

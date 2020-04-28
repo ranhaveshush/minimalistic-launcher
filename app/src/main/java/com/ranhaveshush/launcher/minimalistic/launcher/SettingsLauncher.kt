@@ -9,7 +9,14 @@ interface SettingsLauncher {
     /**
      * Launches the App's info settings for the given [packageName].
      *
-     * @return true in case of success, otherwise false.
+     * @return true in case the launch was successful, otherwise false.
      */
     fun launchAppDetails(context: Application, packageName: String): Boolean
+
+    /**
+     * Launches the Android OS  wallpaper chooser settings.
+     *
+     * @return true in case the launch was successful, otherwise false.
+     */
+    fun launchWallpaperChooser(context: Application): Boolean
 }

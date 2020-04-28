@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import com.ranhaveshush.launcher.minimalistic.ktx.safeLaunch
 
 /**
  * A [SettingsLauncher] implementation.
@@ -16,11 +17,14 @@ class SettingsLauncherImpl : SettingsLauncher {
             data = Uri.parse("package:$packageName")
         }
 
-        return if (intent.resolveActivity(context.packageManager) != null) {
-            context.startActivity(intent)
-            true
-        } else {
-            false
+        return intent.safeLaunch(context)
+    }
+
+    override fun launchWallpaperChooser(context: Application): Boolean {
+        val intent = Intent(Intent.ACTION_SET_WALLPAPER).apply {
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
+
+        return intent.safeLaunch(context)
     }
 }
