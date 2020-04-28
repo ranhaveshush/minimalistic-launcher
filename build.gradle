@@ -5,6 +5,7 @@ buildscript {
     ext.version_detekt_gradle = '1.0.0-RC14'
     ext.version_navigation_gradle = '2.3.0-alpha04'
     ext.version_google_services = '4.3.3'
+    ext.version_firebase_crashlytics = '2.0.0'
 
     repositories {
         google()
@@ -17,6 +18,7 @@ buildscript {
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${version_detekt_gradle}"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${version_navigation_gradle}"
         classpath "com.google.gms:google-services:${version_google_services}"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:${version_firebase_crashlytics}"
     }
 }
 
@@ -53,6 +55,7 @@ allprojects {
 
     // Firebase
     ext.version_firebase_analytics = '17.4.0'
+    ext.version_firebase_crashlytics = '17.0.0'
 
     // Retrofit
     ext.version_retrofit = '2.8.1'
