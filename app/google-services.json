@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1090252281238",
+    "firebase_url": "https://minimalistic-launcher.firebaseio.com",
+    "project_id": "minimalistic-launcher",
+    "storage_bucket": "minimalistic-launcher.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090252281238:android:46cf5890c2a8dc4ad2f9b7",
+        "android_client_info": {
+          "package_name": "com.ranhaveshush.launcher.minimalistic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090252281238-7dp2as7peqjjn5f12fg37buvne36ul37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ranhaveshush.launcher.minimalistic",
+            "certificate_hash": "5511d551732b6987eca1fdf52b8ab1b3d8af5256"
+          }
+        },
+        {
+          "client_id": "1090252281238-vii9pjun9ej95dpsnko9tgbr0rg8lutp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSuhi8mqbelgGgyJ9FrdOCE_vYZtqoM14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090252281238-vii9pjun9ej95dpsnko9tgbr0rg8lutp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
