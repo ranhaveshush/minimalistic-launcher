@@ -25,11 +25,11 @@ class NotificationCacheImpl : NotificationCache {
 
     override suspend fun remove(sbn: StatusBarNotification) {
         remove(sbn.key)
-        updateChannel()
     }
 
     override suspend fun remove(key: String) {
         cache.remove(key)
+        updateChannel()
     }
 
     override suspend fun clear() {

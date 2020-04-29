@@ -29,6 +29,8 @@ class NotificationsAdapter(
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
+    fun getNotificationItem(position: Int): NotificationItem? = getItem(position)
 }
 
 class NotificationViewHolder(private val binding: ListItemNotificationBinding) : RecyclerView.ViewHolder(binding.root) {

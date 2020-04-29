@@ -19,8 +19,10 @@ class NotificationViewModel(
 
     override fun launch(notificationItem: NotificationItem) {
         notificationsLauncher.launch(notificationItem)
-        viewModelScope.launch {
-            repository.remove(notificationItem.key)
-        }
+        remove(notificationItem)
+    }
+
+    fun remove(notificationItem: NotificationItem) = viewModelScope.launch {
+        repository.remove(notificationItem.key)
     }
 }
