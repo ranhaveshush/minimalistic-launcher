@@ -33,14 +33,7 @@ class NotificationService : NotificationListenerService() {
         sbn?.let {
             serviceScope.launch {
                 repository.add(sbn)
-            }
-        }
-    }
-
-    override fun onNotificationRemoved(sbn: StatusBarNotification?) {
-        sbn?.let {
-            serviceScope.launch {
-                repository.remove(sbn)
+                cancelNotification(sbn.key)
             }
         }
     }
