@@ -15,13 +15,9 @@ class NotificationService : NotificationListenerService() {
 
     private lateinit var repository: NotificationRepository
 
-    private var isConnected: Boolean = false
-
     override fun onListenerConnected() {
-        serviceScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+        serviceScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
         repository = InjectorUtils.provideNotificationRepository(applicationContext)
-
-        isConnected = true
     }
 
     override fun onListenerDisconnected() {
@@ -31,8 +27,6 @@ class NotificationService : NotificationListenerService() {
             }
             serviceScope.cancel()
         }
-
-        isConnected = false
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {

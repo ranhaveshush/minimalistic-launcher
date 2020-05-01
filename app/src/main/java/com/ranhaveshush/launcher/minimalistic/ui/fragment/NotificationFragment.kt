@@ -48,7 +48,7 @@ class NotificationFragment : Fragment(R.layout.fragment_notifications), Notifica
                 .setTimeoutAfter(System.currentTimeMillis() + 10000)
                 .build()
 
-            NotificationManagerCompat.from(context).notify(12345, notification)
+            NotificationManagerCompat.from(context).notify((Math.random()*100).toInt(), notification)
         }
 
         binding.recyclerViewNotifications.adapter = notificationsAdapter

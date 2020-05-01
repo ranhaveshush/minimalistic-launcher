@@ -2,6 +2,7 @@ package com.ranhaveshush.launcher.minimalistic.util
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.service.notification.StatusBarNotification
 import com.ranhaveshush.launcher.minimalistic.cache.NotificationCache
 import com.ranhaveshush.launcher.minimalistic.cache.NotificationCacheImpl
 import com.ranhaveshush.launcher.minimalistic.cache.NotificationTransformer
@@ -18,9 +19,13 @@ import com.ranhaveshush.launcher.minimalistic.repository.NotificationRepository
 import com.ranhaveshush.launcher.minimalistic.viewmodel.AppDrawerViewModelFactory
 import com.ranhaveshush.launcher.minimalistic.viewmodel.HomeViewModelFactory
 import com.ranhaveshush.launcher.minimalistic.viewmodel.NotificationViewModelFactory
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.Channel
+import java.util.Collections
 
 object InjectorUtils {
-    private lateinit var notificationCache: NotificationCache
+    private val notificationCache: MutableMap<String, StatusBarNotification> = Collections.synchronizedMap(HashMap())
+    private val notificationChannel = BroadcastChannel<Collection<StatusBarNotification>>(Channel.CONFLATED)
 
     fun provideNotificationViewModelFactory(applicationContext: Context) =
         NotificationViewModelFactory(
@@ -50,12 +55,7 @@ object InjectorUtils {
 
     fun provideAppDrawerRepository(packageManager: PackageManager) = AppDrawerRepository(packageManager)
 
-    fun provideNotificationCache(): NotificationCache {
-        if (!this::notificationCache.isInitialized) {
-            notificationCache = NotificationCacheImpl()
-        }
-        return notificationCache
-    }
+    fun provideNotificationCache(): NotificationCache = NotificationCacheImpl(notificationCache, notificationChannel)
 
     fun provideNotificationTransformer(): NotificationTransformer = NotificationTransformerImpl()
 
