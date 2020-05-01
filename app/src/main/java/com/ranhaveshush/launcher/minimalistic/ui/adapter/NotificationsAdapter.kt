@@ -44,7 +44,10 @@ class NotificationViewHolder(private val binding: ListItemNotificationBinding) :
 }
 
 class NotificationDiffCallback : DiffUtil.ItemCallback<NotificationItem>() {
-    override fun areContentsTheSame(oldItem: NotificationItem, newItem: NotificationItem): Boolean = oldItem.key == newItem.key
+    override fun areContentsTheSame(oldItem: NotificationItem, newItem: NotificationItem): Boolean = oldItem.appLabel == newItem.appLabel
+            && oldItem.postTime == newItem.postTime
+            && oldItem.text == newItem.text
+            && oldItem.title == newItem.title
 
-    override fun areItemsTheSame(oldItem: NotificationItem, newItem: NotificationItem): Boolean = oldItem == newItem
+    override fun areItemsTheSame(oldItem: NotificationItem, newItem: NotificationItem): Boolean = oldItem.key == newItem.key
 }

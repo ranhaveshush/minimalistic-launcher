@@ -51,7 +51,8 @@ class DrawerAppViewHolder(private val binding: ListItemDrawerAppBinding) :
 
 class DrawerAppItemDiffCallback : DiffUtil.ItemCallback<DrawerAppItem>() {
 
-    override fun areItemsTheSame(oldItem: DrawerAppItem, newItem: DrawerAppItem) = oldItem.packageName == newItem.packageName
+    override fun areItemsTheSame(oldItem: DrawerAppItem, newItem: DrawerAppItem) = oldItem.label == newItem.label
 
-    override fun areContentsTheSame(oldItem: DrawerAppItem, newItem: DrawerAppItem) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: DrawerAppItem, newItem: DrawerAppItem) = oldItem.packageName == newItem.packageName
+            && oldItem.activityName == newItem.activityName
 }

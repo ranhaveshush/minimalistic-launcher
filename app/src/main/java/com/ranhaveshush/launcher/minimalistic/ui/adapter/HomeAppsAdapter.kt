@@ -51,7 +51,8 @@ class HomeAppViewHolder(private val binding: ListItemHomeAppBinding) :
 
 class HomeAppItemDiffCallback : DiffUtil.ItemCallback<HomeAppItem>() {
 
-    override fun areItemsTheSame(oldItem: HomeAppItem, newItem: HomeAppItem) = oldItem.packageName == newItem.packageName
+    override fun areItemsTheSame(oldItem: HomeAppItem, newItem: HomeAppItem) = oldItem.label == newItem.label
 
-    override fun areContentsTheSame(oldItem: HomeAppItem, newItem: HomeAppItem) = oldItem == newItem
+    override fun areContentsTheSame(oldItem: HomeAppItem, newItem: HomeAppItem) = oldItem.packageName == newItem.packageName
+            && oldItem.activityName == newItem.activityName
 }
