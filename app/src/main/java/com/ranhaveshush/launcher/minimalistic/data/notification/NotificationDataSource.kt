@@ -1,14 +1,13 @@
-package com.ranhaveshush.launcher.minimalistic.cache
+package com.ranhaveshush.launcher.minimalistic.data.notification
 
 import android.service.notification.StatusBarNotification
 import kotlinx.coroutines.flow.Flow
 
 /**
- * A cache of [notifications][StatusBarNotification] posted to the Android OS by Apps.
+ * A data source of [notifications][StatusBarNotification] posted to the Android OS by apps.
  */
-interface NotificationCache {
+interface NotificationDataSource {
     fun asFlow(): Flow<Collection<StatusBarNotification>>
-    fun getAll(): Collection<StatusBarNotification>
     suspend fun add(sbn: StatusBarNotification)
     suspend fun remove(sbn: StatusBarNotification)
     suspend fun remove(key: String)

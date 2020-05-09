@@ -1,4 +1,4 @@
-package com.ranhaveshush.launcher.minimalistic.cache
+package com.ranhaveshush.launcher.minimalistic.data.notification
 
 import android.service.notification.StatusBarNotification
 import kotlinx.coroutines.channels.BroadcastChannel
@@ -6,15 +6,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 
 /**
- * A [NotificationCache] implementation.
+ * A [NotificationDataSource] implementation.
  */
-class NotificationCacheImpl(
+class NotificationDataSourceImpl(
     private val cache: MutableMap<String, StatusBarNotification>,
     private val broadcastChannel: BroadcastChannel<Collection<StatusBarNotification>>
-) : NotificationCache {
+) : NotificationDataSource {
     override fun asFlow(): Flow<Collection<StatusBarNotification>> = broadcastChannel.asFlow()
-
-    override fun getAll(): Collection<StatusBarNotification> = cache.values
 
     override suspend fun add(sbn: StatusBarNotification) {
         cache[sbn.key] = sbn
@@ -36,6 +34,6 @@ class NotificationCacheImpl(
     }
 
     private suspend fun updateChannel() {
-        broadcastChannel.send(getAll())
+        broadcastChannel.send(cache.values)
     }
 }

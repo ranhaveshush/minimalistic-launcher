@@ -1,39 +1,30 @@
 package com.ranhaveshush.launcher.minimalistic.repository
 
-import android.content.Intent
-import android.content.pm.PackageManager
+import com.ranhaveshush.launcher.minimalistic.data.app.DrawerAppItemTransformer
+import com.ranhaveshush.launcher.minimalistic.data.app.InstalledAppsDataSource
 import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
-class AppDrawerRepository(private val packageManager: PackageManager) {
-    fun listApps(filter: String = ""): Flow<Resource<List<DrawerAppItem>>> = flow {
-        emit(Resource.loading())
-
-        val intent = Intent(Intent.ACTION_MAIN).apply {
-            addCategory(Intent.CATEGORY_LAUNCHER)
-        }
-
-        val resolveInfoList = packageManager.queryIntentActivities(intent, 0)
-        val appItems = resolveInfoList.map {
-            val packageName = it.activityInfo.packageName
-            val activityName = it.activityInfo.name
-            val label = it.loadLabel(packageManager).toString().capitalize()
-            val name = label.toLowerCase()
-            val icon = it.loadIcon(packageManager)
-            DrawerAppItem(packageName, activityName, name, label, icon)
+class AppDrawerRepository(
+    private val dataSource: InstalledAppsDataSource,
+    private val dataTransformer: DrawerAppItemTransformer
+) {
+    fun listApps(filter: String = ""): Flow<Resource<List<DrawerAppItem>>> = dataSource.asFlow().map { resolveInfos ->
+        val appItems = resolveInfos.map { resolveInfo ->
+            dataTransformer.transform(resolveInfo)
         }
 
         val normalizedFilter = filter.toLowerCase()
-        val filteredAppItems = appItems.filter {
-            it.name.startsWith(normalizedFilter)
+        val filteredAppItems = appItems.filter { appItem ->
+            appItem.name.startsWith(normalizedFilter)
         }
 
-        val sortedAppItems = filteredAppItems.sortedBy {
-            it.name
+        val sortedAppItems = filteredAppItems.sortedBy { appItem ->
+            appItem.name
         }
 
-        emit(Resource.success(sortedAppItems))
+        Resource.success(sortedAppItems)
     }
 }

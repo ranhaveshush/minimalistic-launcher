@@ -1,4 +1,4 @@
-package com.ranhaveshush.launcher.minimalistic.cache
+package com.ranhaveshush.launcher.minimalistic.data.notification
 
 import android.app.Notification
 import android.content.Context
@@ -11,9 +11,14 @@ import androidx.core.graphics.drawable.toBitmap
 import com.ranhaveshush.launcher.minimalistic.vo.NotificationItem
 import com.ranhaveshush.launcher.minimalistic.vo.NotificationTime
 
-class NotificationTransformerImpl : NotificationTransformer {
-    override fun transform(context: Context, sbn: StatusBarNotification): NotificationItem {
-        val notification = sbn.notification
+/**
+ * A [NotificationItemTransformer] implementation.
+ */
+class NotificationItemTransformerImpl(
+    private val context: Context
+) : NotificationItemTransformer {
+    override fun transform(data: StatusBarNotification): NotificationItem {
+        val notification = data.notification
 
         val appInfo = notification.extras.getParcelable("android.appInfo") as ApplicationInfo
         val appLabel = appInfo.loadLabel(context.packageManager).toString()
@@ -31,8 +36,8 @@ class NotificationTransformerImpl : NotificationTransformer {
         val deleteIntent = notification.deleteIntent
 
         return NotificationItem(
-            sbn.key,
-            sbn.packageName,
+            data.key,
+            data.packageName,
             BitmapDrawable(context.resources, appIconBitmap),
             appLabel,
             NotificationTime(postedAt),

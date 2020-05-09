@@ -1,35 +1,27 @@
 package com.ranhaveshush.launcher.minimalistic.repository
 
-import android.content.Intent
-import android.content.pm.PackageManager
+import com.ranhaveshush.launcher.minimalistic.data.app.HomeAppItemTransformer
+import com.ranhaveshush.launcher.minimalistic.data.app.InstalledAppsDataSource
 import com.ranhaveshush.launcher.minimalistic.vo.HomeAppItem
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 
-class HomeRepository(private val packageManager: PackageManager) {
-    fun listApps(): Flow<Resource<List<HomeAppItem>>> = flow {
-        emit(Resource.loading())
-
-        val intent = Intent(Intent.ACTION_MAIN).apply {
-            addCategory(Intent.CATEGORY_LAUNCHER)
-        }
-
-        val resolveInfoList = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-        val appItems = resolveInfoList.map {
-            val packageName = it.activityInfo.packageName
-            val activityName = it.activityInfo.name
-            val label = it.loadLabel(packageManager).toString().capitalize()
-            val name = label.toLowerCase()
-            HomeAppItem(packageName, activityName, name, label)
+class HomeRepository(
+    private val dataSource: InstalledAppsDataSource,
+    private val dataTransformer: HomeAppItemTransformer
+) {
+    fun listApps(): Flow<Resource<List<HomeAppItem>>> = dataSource.asFlow().map { resolveInfos ->
+        val appItems = resolveInfos.map { resolveInfo ->
+            dataTransformer.transform(resolveInfo)
         }
 
         val filteredAppItems = appItems.subList(0, 7)
 
-        val sortedAppItems = filteredAppItems.sortedBy {
-            it.name
+        val sortedAppItems = filteredAppItems.sortedBy { appItem ->
+            appItem.name
         }
 
-        emit(Resource.success(sortedAppItems))
+        Resource.success(sortedAppItems)
     }
 }
