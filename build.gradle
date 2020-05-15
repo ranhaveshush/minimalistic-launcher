@@ -46,15 +46,15 @@ allprojects {
 
     // AndroidX
     ext.version_legacy = '1.0.0'
-    ext.version_appcompat = '1.2.0-beta01'
-    ext.version_constraintlayout = '2.0.0-beta4'
+    ext.version_appcompat = '1.2.0-rc01'
+    ext.version_constraintlayout = '2.0.0-beta6'
     ext.version_viewpager2 = '1.0.0'
     ext.version_lifecycle = '2.2.0'
-    ext.version_navigation = '2.3.0-alpha05'
+    ext.version_navigation = '2.3.0-alpha06'
     ext.version_room = '2.2.5'
 
     // Firebase
-    ext.version_firebase_analytics = '17.4.0'
+    ext.version_firebase_analytics = '17.4.1'
     ext.version_firebase_crashlytics = '17.0.0'
 
     // Retrofit
