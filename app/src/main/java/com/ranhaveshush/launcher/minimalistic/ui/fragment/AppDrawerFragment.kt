@@ -55,7 +55,14 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
         return binding.root
     }
 
-    override fun onAppClick(app: DrawerApp) = viewModel.launchApp(application, app)
+    override fun onAppClick(app: DrawerApp) {
+        viewModel.launchApp(application, app)
+        viewModel.clearSearchQuery()
+    }
 
-    override fun onAppLongClick(app: DrawerApp) = viewModel.launchAppDetails(application, app)
+    override fun onAppLongClick(app: DrawerApp): Boolean {
+        val launched = viewModel.launchAppDetails(application, app)
+        viewModel.clearSearchQuery()
+        return launched
+    }
 }

@@ -25,12 +25,16 @@ class AppDrawerViewModel(
 ) : ViewModel() {
     val searchQuery = MutableLiveData<String>()
 
-    init {
-        searchQuery.value = ""
-    }
-
     val apps: LiveData<Resource<List<DrawerAppItem>>> = searchQuery.switchMap {
         listApps(it)
+    }
+
+    init {
+        clearSearchQuery()
+    }
+
+    fun clearSearchQuery() {
+        searchQuery.value = ""
     }
 
     fun launchApp(context: Application, app: DrawerApp) {
