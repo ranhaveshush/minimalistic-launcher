@@ -1,6 +1,5 @@
 package com.ranhaveshush.launcher.minimalistic.ui.fragment
 
-import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,7 @@ import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemClickListen
 import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemLongClickListener
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.HomeViewModel
-import com.ranhaveshush.launcher.minimalistic.vo.HomeAppItem
+import com.ranhaveshush.launcher.minimalistic.vo.HomeApp
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 
 /**
@@ -53,10 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
         return binding.root
     }
 
-    override fun onAppClick(appItem: HomeAppItem) {
-        val componentName = ComponentName(appItem.packageName, appItem.activityName)
-        viewModel.launch(application, componentName)
-    }
+    override fun onAppClick(app: HomeApp) = viewModel.launchApp(application, app)
 
-    override fun onAppLongClick(appItem: HomeAppItem) = viewModel.launchAppDetails(application, appItem.packageName)
+    override fun onAppLongClick(app: HomeApp) = viewModel.launchAppDetails(application, app)
 }

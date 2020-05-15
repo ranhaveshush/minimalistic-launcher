@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ranhaveshush.launcher.minimalistic.databinding.ListItemHomeAppBinding
 import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemClickListener
 import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemLongClickListener
-import com.ranhaveshush.launcher.minimalistic.vo.HomeAppItem
+import com.ranhaveshush.launcher.minimalistic.vo.HomeApp
 
 class HomeAppsAdapter(
     private val itemClickListener: HomeAppItemClickListener,
     private val itemLongClickListener: HomeAppItemLongClickListener
-) : ListAdapter<HomeAppItem, HomeAppViewHolder>(HomeAppItemDiffCallback()) {
+) : ListAdapter<HomeApp, HomeAppViewHolder>(HomeAppItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAppViewHolder {
         val binding = ListItemHomeAppBinding.inflate(
@@ -23,10 +23,10 @@ class HomeAppsAdapter(
         )
 
         binding.root.setOnClickListener {
-            itemClickListener.onAppClick(it.tag as HomeAppItem)
+            itemClickListener.onAppClick(it.tag as HomeApp)
         }
         binding.root.setOnLongClickListener {
-            itemLongClickListener.onAppLongClick(it.tag as HomeAppItem)
+            itemLongClickListener.onAppLongClick(it.tag as HomeApp)
         }
 
         return HomeAppViewHolder(binding)
@@ -40,7 +40,7 @@ class HomeAppsAdapter(
 class HomeAppViewHolder(private val binding: ListItemHomeAppBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: HomeAppItem) {
+    fun bind(item: HomeApp) {
         binding.apply {
             root.tag = item
             app = item
@@ -49,10 +49,10 @@ class HomeAppViewHolder(private val binding: ListItemHomeAppBinding) :
     }
 }
 
-class HomeAppItemDiffCallback : DiffUtil.ItemCallback<HomeAppItem>() {
+class HomeAppItemDiffCallback : DiffUtil.ItemCallback<HomeApp>() {
 
-    override fun areItemsTheSame(oldItem: HomeAppItem, newItem: HomeAppItem) = oldItem.label == newItem.label
+    override fun areItemsTheSame(oldItem: HomeApp, newItem: HomeApp) = oldItem.label == newItem.label
 
-    override fun areContentsTheSame(oldItem: HomeAppItem, newItem: HomeAppItem) = oldItem.packageName == newItem.packageName
+    override fun areContentsTheSame(oldItem: HomeApp, newItem: HomeApp) = oldItem.packageName == newItem.packageName
             && oldItem.activityName == newItem.activityName
 }

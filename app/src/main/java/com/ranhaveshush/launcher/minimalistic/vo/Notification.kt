@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable
 /**
  * A notification [ValueObject].
  */
-data class NotificationItem(
+data class Notification(
     val key: String,
     val packageName: String,
     val appIcon: Drawable,

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+                name="header"
+                type="com.ranhaveshush.launcher.minimalistic.vo.DrawerAppHeader" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_standard">
+
+        <TextView
+                android:id="@+id/textView_appsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/apps_title"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="@dimen/title_large"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/textView_appsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{header.appsCount}"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="@dimen/title_large"
+                app:layout_constraintBottom_toBottomOf="@+id/textView_appsTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView_appsTitle"
+                tools:text="97" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

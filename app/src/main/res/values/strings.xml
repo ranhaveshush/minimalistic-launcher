@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Minimalistic Launcher</string>
 
+    <!-- Notifications -->
+    <string name="notifications_title">Notifications</string>
+    <string name="button_clear_all">Clear all</string>
+
     <!-- Apps Drawer -->
+    <string name="apps_title">Apps</string>
     <string name="app_search_hint">Apps</string>
     <string name="app_icon_content_description">App icon</string>
 </resources>

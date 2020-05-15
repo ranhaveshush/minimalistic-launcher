@@ -1,10 +1,10 @@
 package com.ranhaveshush.launcher.minimalistic.ui.listener
 
-import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
+import com.ranhaveshush.launcher.minimalistic.vo.DrawerApp
 
 /**
- * A long click listener for an [DrawerAppItem].
+ * A long click listener for an [DrawerApp].
  */
 interface DrawerAppItemLongClickListener {
-    fun onAppLongClick(appItem: DrawerAppItem): Boolean
+    fun onAppLongClick(app: DrawerApp): Boolean
 }

@@ -1,13 +1,13 @@
 package com.ranhaveshush.launcher.minimalistic.launcher
 
-import com.ranhaveshush.launcher.minimalistic.vo.NotificationItem
+import com.ranhaveshush.launcher.minimalistic.vo.Notification
 
 /**
  * An notification launcher.
  */
 interface NotificationsLauncher {
     /**
-     * Launches a sender App with the given [NotificationItem].
+     * Launches a sender App with the given [Notification].
      */
-    fun launch(notificationItem: NotificationItem)
+    fun launch(notification: Notification)
 }

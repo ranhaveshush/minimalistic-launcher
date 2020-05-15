@@ -1,23 +1,22 @@
 package com.ranhaveshush.launcher.minimalistic.data.notification
 
-import android.app.Notification
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.service.notification.StatusBarNotification
+import androidx.core.app.NotificationCompat
 import androidx.core.graphics.drawable.toBitmap
-import com.ranhaveshush.launcher.minimalistic.vo.NotificationItem
 import com.ranhaveshush.launcher.minimalistic.vo.NotificationTime
 
 /**
- * A [NotificationItemTransformer] implementation.
+ * A [NotificationTransformer] implementation.
  */
-class NotificationItemTransformerImpl(
+class NotificationTransformerImpl(
     private val context: Context
-) : NotificationItemTransformer {
-    override fun transform(data: StatusBarNotification): NotificationItem {
+) : NotificationTransformer {
+    override fun transform(data: StatusBarNotification): com.ranhaveshush.launcher.minimalistic.vo.Notification {
         val notification = data.notification
 
         val appInfo = notification.extras.getParcelable("android.appInfo") as ApplicationInfo
@@ -30,12 +29,12 @@ class NotificationItemTransformerImpl(
         val appIconBitmap = appIconDrawable.toBitmap(appIconDrawable.intrinsicWidth, appIconDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
 
         val postedAt = notification.`when`
-        val title = notification.extras.get(Notification.EXTRA_TITLE)?.toString() ?: ""
-        val text = notification.extras.get(Notification.EXTRA_TEXT)?.toString() ?: ""
+        val title = notification.extras.get(NotificationCompat.EXTRA_TITLE)?.toString() ?: ""
+        val text = notification.extras.get(NotificationCompat.EXTRA_TEXT)?.toString() ?: ""
         val contentIntent = notification.contentIntent
         val deleteIntent = notification.deleteIntent
 
-        return NotificationItem(
+        return com.ranhaveshush.launcher.minimalistic.vo.Notification(
             data.key,
             data.packageName,
             BitmapDrawable(context.resources, appIconBitmap),

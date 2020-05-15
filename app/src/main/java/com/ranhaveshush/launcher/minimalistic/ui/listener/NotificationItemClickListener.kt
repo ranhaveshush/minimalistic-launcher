@@ -1,10 +1,10 @@
 package com.ranhaveshush.launcher.minimalistic.ui.listener
 
-import com.ranhaveshush.launcher.minimalistic.vo.NotificationItem
+import com.ranhaveshush.launcher.minimalistic.vo.Notification
 
 /**
- * A click listener or an [NotificationItem].
+ * A click listener for an [Notification].
  */
 interface NotificationItemClickListener {
-    fun onNotificationClick(notificationItem: NotificationItem)
+    fun onNotificationClick(notification: Notification)
 }

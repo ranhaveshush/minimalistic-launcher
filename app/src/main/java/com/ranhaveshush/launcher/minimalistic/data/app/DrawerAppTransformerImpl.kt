@@ -2,20 +2,20 @@ package com.ranhaveshush.launcher.minimalistic.data.app
 
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
+import com.ranhaveshush.launcher.minimalistic.vo.DrawerApp
 
 /**
- * An [DrawerAppItemTransformer] implementation.
+ * An [DrawerAppTransformer] implementation.
  */
-class DrawerAppItemTransformerImpl(
+class DrawerAppTransformerImpl(
     private val packageManager: PackageManager
-) : DrawerAppItemTransformer {
-    override fun transform(data: ResolveInfo): DrawerAppItem {
+) : DrawerAppTransformer {
+    override fun transform(data: ResolveInfo): DrawerApp {
         val packageName = data.activityInfo.packageName
         val activityName = data.activityInfo.name
         val label = data.loadLabel(packageManager).toString().capitalize()
         val name = label.toLowerCase()
         val icon = data.loadIcon(packageManager)
-        return DrawerAppItem(packageName, activityName, name, label, icon)
+        return DrawerApp(packageName, activityName, name, label, icon)
     }
 }

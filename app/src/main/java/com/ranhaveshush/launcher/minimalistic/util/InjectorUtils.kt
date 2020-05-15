@@ -4,16 +4,16 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.service.notification.StatusBarNotification
-import com.ranhaveshush.launcher.minimalistic.data.app.DrawerAppItemTransformer
-import com.ranhaveshush.launcher.minimalistic.data.app.DrawerAppItemTransformerImpl
-import com.ranhaveshush.launcher.minimalistic.data.app.HomeAppItemTransformer
-import com.ranhaveshush.launcher.minimalistic.data.app.HomeAppItemTransformerImpl
+import com.ranhaveshush.launcher.minimalistic.data.app.DrawerAppTransformer
+import com.ranhaveshush.launcher.minimalistic.data.app.DrawerAppTransformerImpl
+import com.ranhaveshush.launcher.minimalistic.data.app.HomeAppTransformer
+import com.ranhaveshush.launcher.minimalistic.data.app.HomeAppTransformerImpl
 import com.ranhaveshush.launcher.minimalistic.data.app.InstalledAppsDataSource
 import com.ranhaveshush.launcher.minimalistic.data.app.InstalledAppsDataSourceImpl
 import com.ranhaveshush.launcher.minimalistic.data.notification.NotificationDataSource
 import com.ranhaveshush.launcher.minimalistic.data.notification.NotificationDataSourceImpl
-import com.ranhaveshush.launcher.minimalistic.data.notification.NotificationItemTransformer
-import com.ranhaveshush.launcher.minimalistic.data.notification.NotificationItemTransformerImpl
+import com.ranhaveshush.launcher.minimalistic.data.notification.NotificationTransformer
+import com.ranhaveshush.launcher.minimalistic.data.notification.NotificationTransformerImpl
 import com.ranhaveshush.launcher.minimalistic.launcher.AppsLauncher
 import com.ranhaveshush.launcher.minimalistic.launcher.AppsLauncherImpl
 import com.ranhaveshush.launcher.minimalistic.launcher.NotificationsLauncher
@@ -41,7 +41,7 @@ object InjectorUtils {
 
     fun provideNotificationRepository(applicationContext: Context) = NotificationRepository(
         provideNotificationDataSource(),
-        provideNotificationItemTransformer(applicationContext)
+        provideNotificationTransformer(applicationContext)
     )
 
     fun provideHomeViewModelFactory(packageManager: PackageManager) = HomeViewModelFactory(
@@ -52,7 +52,7 @@ object InjectorUtils {
 
     fun provideHomeRepository(packageManager: PackageManager) = HomeRepository(
         provideInstalledAppsDataSource(packageManager),
-        provideHomeAppItemTransformer(packageManager)
+        provideHomeAppTransformer(packageManager)
     )
 
     fun provideAppDrawerViewModelFactory(packageManager: PackageManager) = AppDrawerViewModelFactory(
@@ -63,7 +63,7 @@ object InjectorUtils {
 
     fun provideAppDrawerRepository(packageManager: PackageManager) = AppDrawerRepository(
         provideInstalledAppsDataSource(packageManager),
-        provideDrawerAppItemTransformer(packageManager)
+        provideDrawerAppTransformer(packageManager)
     )
 
     fun provideInstalledAppsDataSource(packageManager: PackageManager): InstalledAppsDataSource {
@@ -95,11 +95,11 @@ object InjectorUtils {
         return notificationDataSource
     }
 
-    fun provideHomeAppItemTransformer(packageManager: PackageManager): HomeAppItemTransformer = HomeAppItemTransformerImpl(packageManager)
+    fun provideHomeAppTransformer(packageManager: PackageManager): HomeAppTransformer = HomeAppTransformerImpl(packageManager)
 
-    fun provideDrawerAppItemTransformer(packageManager: PackageManager): DrawerAppItemTransformer = DrawerAppItemTransformerImpl(packageManager)
+    fun provideDrawerAppTransformer(packageManager: PackageManager): DrawerAppTransformer = DrawerAppTransformerImpl(packageManager)
 
-    fun provideNotificationItemTransformer(context: Context): NotificationItemTransformer = NotificationItemTransformerImpl(context)
+    fun provideNotificationTransformer(context: Context): NotificationTransformer = NotificationTransformerImpl(context)
 
     fun provideAppsLauncher(): AppsLauncher = AppsLauncherImpl()
 

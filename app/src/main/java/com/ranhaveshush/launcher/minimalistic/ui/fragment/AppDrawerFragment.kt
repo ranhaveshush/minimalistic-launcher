@@ -1,6 +1,5 @@
 package com.ranhaveshush.launcher.minimalistic.ui.fragment
 
-import android.content.ComponentName
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemClickList
 import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemLongClickListener
 import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.AppDrawerViewModel
-import com.ranhaveshush.launcher.minimalistic.vo.DrawerAppItem
+import com.ranhaveshush.launcher.minimalistic.vo.DrawerApp
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
@@ -56,10 +55,7 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
         return binding.root
     }
 
-    override fun onAppClick(appItem: DrawerAppItem) {
-        val componentName = ComponentName(appItem.packageName, appItem.activityName)
-        viewModel.launch(application, componentName)
-    }
+    override fun onAppClick(app: DrawerApp) = viewModel.launchApp(application, app)
 
-    override fun onAppLongClick(appItem: DrawerAppItem) = viewModel.launchAppDetails(application, appItem.packageName)
+    override fun onAppLongClick(app: DrawerApp) = viewModel.launchAppDetails(application, app)
 }
