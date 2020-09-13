@@ -17,12 +17,12 @@ class AppDrawerRepository(
         }
 
         val normalizedFilter = filter.toLowerCase()
-        val filteredApps = apps.filter { appItem ->
-            appItem.name.startsWith(normalizedFilter)
+        val filteredApps = apps.filter { app ->
+            app.name.startsWith(normalizedFilter)
         }
 
-        val sortedApps = filteredApps.sortedBy { appItem ->
-            appItem.name
+        val sortedApps = filteredApps.sortedBy { app ->
+            app.name
         }
 
         Resource.success(sortedApps)
