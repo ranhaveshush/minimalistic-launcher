@@ -1,5 +1,6 @@
 package com.ranhaveshush.launcher.minimalistic.repository
 
+import android.content.pm.ApplicationInfo
 import com.ranhaveshush.launcher.minimalistic.data.app.HomeAppTransformer
 import com.ranhaveshush.launcher.minimalistic.data.app.InstalledAppsDataSource
 import com.ranhaveshush.launcher.minimalistic.vo.HomeApp

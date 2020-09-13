@@ -38,7 +38,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version_kotlin_stdlib_jdk8}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version_kotlin}"
     implementation "androidx.core:core-ktx:${version_core_ktx}"
     // AndroidX
     implementation "androidx.legacy:legacy-support-v4:${version_legacy}"
