@@ -2,6 +2,7 @@ package com.ranhaveshush.launcher.minimalistic.viewmodel
 
 import android.app.Application
 import android.content.ComponentName
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -13,7 +14,7 @@ import com.ranhaveshush.launcher.minimalistic.vo.HomeApp
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.Dispatchers
 
-class HomeViewModel(
+class HomeViewModel @ViewModelInject constructor(
     private val repository: HomeRepository,
     private val appsLauncher: AppsLauncher,
     private val settingsLauncher: SettingsLauncher

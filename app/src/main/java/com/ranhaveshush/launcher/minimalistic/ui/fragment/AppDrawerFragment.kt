@@ -13,20 +13,19 @@ import com.ranhaveshush.launcher.minimalistic.databinding.FragmentAppDrawerBindi
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.DrawerAppsAdapter
 import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemClickListener
 import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemLongClickListener
-import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.AppDrawerViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.DrawerApp
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_app_drawer.*
 
 /**
  * This app drawer fragment represents the all apps screen,
  * a container for all installed apps.
  */
+@AndroidEntryPoint
 class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemClickListener, DrawerAppItemLongClickListener {
-    private val viewModel: AppDrawerViewModel by viewModels {
-        InjectorUtils.provideAppDrawerViewModelFactory(packageManager)
-    }
+    private val viewModel: AppDrawerViewModel by viewModels()
 
     private val appsAdapter = DrawerAppsAdapter(this, this)
 

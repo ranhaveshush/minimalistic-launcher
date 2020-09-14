@@ -7,8 +7,9 @@ import com.ranhaveshush.launcher.minimalistic.vo.HomeApp
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class HomeRepository(
+class HomeRepository @Inject constructor(
     private val dataSource: InstalledAppsDataSource,
     private val dataTransformer: HomeAppTransformer
 ) {

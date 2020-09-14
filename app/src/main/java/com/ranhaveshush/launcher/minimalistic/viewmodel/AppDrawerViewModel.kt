@@ -2,6 +2,7 @@ package com.ranhaveshush.launcher.minimalistic.viewmodel
 
 import android.app.Application
 import android.content.ComponentName
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +19,7 @@ import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 
-class AppDrawerViewModel(
+class AppDrawerViewModel @ViewModelInject constructor(
     private val repository: AppDrawerRepository,
     private val appsLauncher: AppsLauncher,
     private val settingsLauncher: SettingsLauncher

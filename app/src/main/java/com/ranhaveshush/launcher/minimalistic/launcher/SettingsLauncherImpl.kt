@@ -5,11 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import com.ranhaveshush.launcher.minimalistic.ktx.safeLaunch
+import javax.inject.Inject
 
 /**
  * A [SettingsLauncher] implementation.
  */
-class SettingsLauncherImpl : SettingsLauncher {
+class SettingsLauncherImpl @Inject constructor() : SettingsLauncher {
     override fun launchAppDetails(context: Application, packageName: String): Boolean {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             addCategory(Intent.CATEGORY_DEFAULT)

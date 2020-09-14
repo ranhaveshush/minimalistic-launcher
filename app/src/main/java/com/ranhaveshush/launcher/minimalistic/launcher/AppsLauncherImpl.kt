@@ -4,11 +4,12 @@ import android.app.Application
 import android.content.ComponentName
 import android.content.Intent
 import com.ranhaveshush.launcher.minimalistic.ktx.safeLaunch
+import javax.inject.Inject
 
 /**
  * An [AppsLauncher] implementation.
  */
-class AppsLauncherImpl : AppsLauncher {
+class AppsLauncherImpl @Inject constructor() : AppsLauncher {
     override fun launch(context: Application, componentName: ComponentName): Boolean {
         val intent = Intent(Intent.ACTION_MAIN).apply {
             addCategory(Intent.CATEGORY_LAUNCHER)

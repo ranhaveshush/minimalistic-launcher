@@ -9,17 +9,19 @@ import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.ranhaveshush.launcher.minimalistic.vo.NotificationTime
+import javax.inject.Inject
 
 /**
  * A [NotificationTransformer] implementation.
  */
-class NotificationTransformerImpl(
+class NotificationTransformerImpl @Inject constructor(
     private val context: Context
 ) : NotificationTransformer {
     override fun transform(data: StatusBarNotification): com.ranhaveshush.launcher.minimalistic.vo.Notification {
         val notification = data.notification
 
-        val appInfo = notification.extras.getParcelable("android.appInfo") as ApplicationInfo
+        // TODO: 14/09/2020 handle a possible nullable value.
+        val appInfo: ApplicationInfo = notification.extras.getParcelable("android.appInfo")!!
         val appLabel = appInfo.loadLabel(context.packageManager).toString()
         val appIconDrawable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             notification.smallIcon.loadDrawable(context)

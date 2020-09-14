@@ -6,8 +6,9 @@ import com.ranhaveshush.launcher.minimalistic.vo.Notification
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class NotificationRepository(
+class NotificationRepository @Inject constructor(
     private val dataSource: NotificationDataSource,
     private val dataTransformer: NotificationTransformer
 ) {

@@ -3,11 +3,12 @@ package com.ranhaveshush.launcher.minimalistic.data.app
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import com.ranhaveshush.launcher.minimalistic.vo.DrawerApp
+import javax.inject.Inject
 
 /**
  * An [DrawerAppTransformer] implementation.
  */
-class DrawerAppTransformerImpl(
+class DrawerAppTransformerImpl @Inject constructor(
     private val packageManager: PackageManager
 ) : DrawerAppTransformer {
     override fun transform(data: ResolveInfo): DrawerApp {

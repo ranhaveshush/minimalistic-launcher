@@ -1,5 +1,6 @@
 package com.ranhaveshush.launcher.minimalistic.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -14,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class NotificationViewModel(
+class NotificationViewModel @ViewModelInject constructor(
     private val repository: NotificationRepository,
     private val notificationsLauncher: NotificationsLauncher
 ) : ViewModel(), NotificationsLauncher {

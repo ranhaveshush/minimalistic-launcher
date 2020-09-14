@@ -12,19 +12,18 @@ import com.ranhaveshush.launcher.minimalistic.databinding.FragmentHomeBinding
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.HomeAppsAdapter
 import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemClickListener
 import com.ranhaveshush.launcher.minimalistic.ui.listener.HomeAppItemLongClickListener
-import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.HomeViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.HomeApp
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * This home fragment represents the home screen,
  * a container for the favorite fast access apps.
  */
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener, HomeAppItemLongClickListener {
-    private val viewModel: HomeViewModel by viewModels {
-        InjectorUtils.provideHomeViewModelFactory(packageManager)
-    }
+    private val viewModel: HomeViewModel by viewModels()
 
     private val appsAdapter = HomeAppsAdapter(this, this)
 

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
@@ -23,8 +24,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -40,23 +41,28 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${version_kotlin}"
     implementation "androidx.core:core-ktx:${version_core_ktx}"
-    // AndroidX
+    // DI
+    implementation "com.google.dagger:hilt-android:${version_hilt}"
+    kapt "com.google.dagger:hilt-android-compiler:${version_hilt}"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:${version_hilt_lifecycle_viewmodel}"
+    kapt "androidx.hilt:hilt-compiler:${version_hilt_lifecycle_viewmodel}"
+    // Legacy
     implementation "androidx.legacy:legacy-support-v4:${version_legacy}"
-    // AndroidX UI
+    // UI
     implementation "androidx.appcompat:appcompat:${version_appcompat}"
     implementation "androidx.constraintlayout:constraintlayout:${version_constraintlayout}"
     implementation "androidx.viewpager2:viewpager2:${version_viewpager2}"
-    // AndroidX lifecycle
+    // Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:${version_lifecycle}"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${version_lifecycle}"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${version_lifecycle}"
-    // AndroidX navigation
+    // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:${version_navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${version_navigation}"
-    // AndroidX Room
+    // Room
     implementation "androidx.room:room-runtime:${version_room}"
-    implementation "androidx.room:room-ktx:${version_room}"
     kapt "androidx.room:room-compiler:${version_room}"
+    implementation "androidx.room:room-ktx:${version_room}"
     // Firebase
     implementation "com.google.firebase:firebase-analytics:${version_firebase_analytics}"
     implementation "com.google.firebase:firebase-crashlytics:${version_firebase_crashlytics}"

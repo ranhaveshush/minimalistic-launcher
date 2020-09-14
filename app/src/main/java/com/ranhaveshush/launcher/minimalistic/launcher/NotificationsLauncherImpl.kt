@@ -2,11 +2,12 @@ package com.ranhaveshush.launcher.minimalistic.launcher
 
 import android.app.PendingIntent
 import com.ranhaveshush.launcher.minimalistic.vo.Notification
+import javax.inject.Inject
 
 /**
  * A [NotificationsLauncher] implementation.
  */
-class NotificationsLauncherImpl : NotificationsLauncher {
+class NotificationsLauncherImpl @Inject constructor() : NotificationsLauncher {
     override fun launch(notification: Notification) {
         try {
             notification.contentIntent?.send()

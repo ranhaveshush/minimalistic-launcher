@@ -2,10 +2,12 @@ package com.ranhaveshush.launcher.minimalistic
 
 import android.app.Application
 import com.ranhaveshush.launcher.minimalistic.receiver.AppPackageAlteredReceiver
+import dagger.hilt.android.HiltAndroidApp
 
 /**
  * An [Application] implementation.
  */
+@HiltAndroidApp
 class App : Application() {
     private val receiver = AppPackageAlteredReceiver()
 

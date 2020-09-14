@@ -21,16 +21,15 @@ import com.ranhaveshush.launcher.minimalistic.ui.listener.ClearAllNotificationsC
 import com.ranhaveshush.launcher.minimalistic.ui.listener.NotificationItemClickListener
 import com.ranhaveshush.launcher.minimalistic.ui.recyclerview.OnSwipedItemListener
 import com.ranhaveshush.launcher.minimalistic.ui.recyclerview.SwipedItemTouchCallback
-import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.viewmodel.NotificationViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.Notification
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NotificationFragment : Fragment(R.layout.fragment_notifications), NotificationItemClickListener, OnSwipedItemListener,
     ClearAllNotificationsClickListener {
-    private val viewModel: NotificationViewModel by viewModels {
-        InjectorUtils.provideNotificationViewModelFactory(requireContext().applicationContext)
-    }
+    private val viewModel: NotificationViewModel by viewModels()
 
     private val notificationsAdapter = NotificationsAdapter(this, this)
 

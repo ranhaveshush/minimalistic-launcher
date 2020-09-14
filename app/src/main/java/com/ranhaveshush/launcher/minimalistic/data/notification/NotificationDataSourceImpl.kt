@@ -4,15 +4,18 @@ import android.service.notification.StatusBarNotification
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * A [NotificationDataSource] implementation.
  */
-class NotificationDataSourceImpl(
+@Singleton
+class NotificationDataSourceImpl @Inject constructor(
     private val cache: MutableMap<String, StatusBarNotification>,
-    private val broadcastChannel: BroadcastChannel<Collection<StatusBarNotification>>
+    private val channel: BroadcastChannel<Collection<StatusBarNotification>>
 ) : NotificationDataSource {
-    override fun asFlow(): Flow<Collection<StatusBarNotification>> = broadcastChannel.asFlow()
+    override fun asFlow(): Flow<Collection<StatusBarNotification>> = channel.asFlow()
 
     override suspend fun add(sbn: StatusBarNotification) {
         cache[sbn.key] = sbn
@@ -34,6 +37,6 @@ class NotificationDataSourceImpl(
     }
 
     private suspend fun updateChannel() {
-        broadcastChannel.send(cache.values)
+        channel.send(cache.values)
     }
 }

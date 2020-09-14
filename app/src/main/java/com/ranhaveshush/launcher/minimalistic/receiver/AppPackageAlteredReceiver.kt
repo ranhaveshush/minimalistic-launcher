@@ -5,29 +5,24 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import com.ranhaveshush.launcher.minimalistic.data.app.InstalledAppsDataSource
-import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A [BroadcastReceiver] implementation,
  * that listens to app install and uninstall events.
  */
+@AndroidEntryPoint
 class AppPackageAlteredReceiver : BroadcastReceiver() {
-    private lateinit var dataSource: InstalledAppsDataSource
+    @Inject
+    lateinit var dataSource: InstalledAppsDataSource
 
     override fun onReceive(context: Context?, intent: Intent?) {
         if (context != null && intent != null && !intent.action.isNullOrEmpty() && actions.contains(intent.action!!)) {
-            initDataSource(context)
-
             intent.dataString?.let { data ->
                 val packageName = data.replace("$PACKAGE_SCHEME:", "")
                 dataSource.onAppAltered(packageName)
             }
-        }
-    }
-
-    private fun initDataSource(context: Context) {
-        if (!this::dataSource.isInitialized) {
-            dataSource = InjectorUtils.provideInstalledAppsDataSource(context.packageManager)
         }
     }
 

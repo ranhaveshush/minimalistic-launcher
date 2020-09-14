@@ -6,21 +6,24 @@ import android.content.pm.ResolveInfo
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * A [InstalledAppsDataSource] implementation.
  */
-class InstalledAppsDataSourceImpl(
+@Singleton
+class InstalledAppsDataSourceImpl @Inject constructor(
     private val packageManager: PackageManager,
     private val cache: MutableMap<String, ResolveInfo>,
-    private val broadcastChannel: BroadcastChannel<Collection<ResolveInfo>>
+    private val channel: BroadcastChannel<Collection<ResolveInfo>>
 ) : InstalledAppsDataSource {
     init {
         refresh()
         updateChannel()
     }
 
-    override fun asFlow(): Flow<Collection<ResolveInfo>> = broadcastChannel.asFlow()
+    override fun asFlow(): Flow<Collection<ResolveInfo>> = channel.asFlow()
 
     override fun onAppAltered(packageName: String) {
         refresh()
@@ -44,6 +47,6 @@ class InstalledAppsDataSourceImpl(
     }
 
     private fun updateChannel() {
-        broadcastChannel.offer(cache.values)
+        channel.offer(cache.values)
     }
 }
