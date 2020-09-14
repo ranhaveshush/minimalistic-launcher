@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+private const val MAX_APPS = 7
+
 class HomeRepository @Inject constructor(
     private val dataSource: InstalledAppsDataSource,
     private val dataTransformer: HomeAppTransformer
@@ -19,14 +21,14 @@ class HomeRepository @Inject constructor(
         val systemApps = resolveInfos.filter { resolveInfo ->
             val applicationInfo = resolveInfo.activityInfo.applicationInfo
             applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0
-                    && applicationInfo.packageName.contains(appNamesFilter)
+                && applicationInfo.packageName.contains(appNamesFilter)
         }
 
         val apps = systemApps.map { resolveInfo ->
             dataTransformer.transform(resolveInfo)
         }
 
-        val filteredApps = apps.subList(0, 7)
+        val filteredApps = apps.subList(0, MAX_APPS)
 
         val sortedApps = filteredApps.sortedBy { app ->
             app.name

@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.ranhaveshush.launcher.minimalistic.R
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.MainFragmentAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_main.viewPager
 
 /**
  * This main fragment represents a container for the top level screens

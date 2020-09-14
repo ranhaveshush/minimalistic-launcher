@@ -2,7 +2,6 @@ package com.ranhaveshush.launcher
 
 import androidx.test.platform.app.InstrumentationRegistry
 import com.ranhaveshush.launcher.minimalistic.repository.AppDrawerRepository
-import com.ranhaveshush.launcher.minimalistic.util.InjectorUtils
 import com.ranhaveshush.launcher.minimalistic.vo.DrawerApp
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -25,7 +24,8 @@ class AppDrawerRepositoryTest {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val packageManager = instrumentation.context.packageManager
 
-        repository = InjectorUtils.provideAppDrawerRepository(packageManager)
+        // TODO: replace InjectorUtils with Hilt.
+//        repository = InjectorUtils.provideAppDrawerRepository(packageManager)
     }
 
     @Test

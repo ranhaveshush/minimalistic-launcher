@@ -23,7 +23,10 @@ class NotificationsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder =
         when (NotificationItem.Type.values()[viewType]) {
-            NotificationItem.Type.HEADER -> NotificationHeaderViewHolder.create(parent, clearAllNotificationsClickListener)
+            NotificationItem.Type.HEADER -> NotificationHeaderViewHolder.create(
+                parent,
+                clearAllNotificationsClickListener
+            )
             NotificationItem.Type.ENTRY -> NotificationEntryViewHolder.create(parent, itemClickListener)
         }
 

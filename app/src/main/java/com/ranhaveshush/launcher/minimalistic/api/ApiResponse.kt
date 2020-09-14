@@ -1,6 +1,7 @@
 package com.ranhaveshush.launcher.minimalistic.api
 
 import retrofit2.Response
+import java.net.HttpURLConnection
 
 /**
  * This class decouples the used networking library (e.g. Retrofit) from the rest of the app.
@@ -29,7 +30,7 @@ sealed class ApiResponse<T> {
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val data = response.body()
-                if (data == null || response.code() == 204) {
+                if (data == null || response.code() == HttpURLConnection.HTTP_NO_CONTENT) {
                     EmptyApiResponse()
                 } else {
                     SuccessApiResponse(data)

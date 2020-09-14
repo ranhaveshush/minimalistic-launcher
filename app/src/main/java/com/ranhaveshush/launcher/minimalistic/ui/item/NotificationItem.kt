@@ -60,11 +60,13 @@ class NotificationItemDiffCallback : DiffUtil.ItemCallback<NotificationItem>() {
     }
 
     private class EntryItemDiffCallback : DiffUtil.ItemCallback<Notification>() {
-        override fun areItemsTheSame(oldItem: Notification, newItem: Notification): Boolean = oldItem.appLabel == newItem.appLabel
+        override fun areItemsTheSame(oldItem: Notification, newItem: Notification): Boolean =
+            oldItem.appLabel == newItem.appLabel
                 && oldItem.postTime == newItem.postTime
                 && oldItem.text == newItem.text
                 && oldItem.title == newItem.title
 
-        override fun areContentsTheSame(oldItem: Notification, newItem: Notification): Boolean = oldItem.key == newItem.key
+        override fun areContentsTheSame(oldItem: Notification, newItem: Notification): Boolean =
+            oldItem.key == newItem.key
     }
 }

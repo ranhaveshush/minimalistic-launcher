@@ -25,6 +25,7 @@ data class NotificationTime(private val time: Long) : Comparable<NotificationTim
     val value: String
         get() = toString()
 
+    @Suppress("MagicNumber", "ReturnCount")
     override fun toString(): String {
         val passedTime = System.currentTimeMillis() - time
         val seconds = passedTime / 1000

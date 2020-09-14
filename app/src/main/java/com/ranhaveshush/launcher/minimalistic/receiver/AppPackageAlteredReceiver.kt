@@ -17,12 +17,16 @@ class AppPackageAlteredReceiver : BroadcastReceiver() {
     @Inject
     lateinit var dataSource: InstalledAppsDataSource
 
+    @Suppress("ReturnCount")
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (context != null && intent != null && !intent.action.isNullOrEmpty() && actions.contains(intent.action!!)) {
-            intent.dataString?.let { data ->
-                val packageName = data.replace("$PACKAGE_SCHEME:", "")
-                dataSource.onAppAltered(packageName)
-            }
+        if (context == null) return
+        if (intent == null) return
+        if (!intent.action.isNullOrEmpty()) return
+        if (actions.contains(intent.action)) return
+
+        intent.dataString?.let { data ->
+            val packageName = data.replace("$PACKAGE_SCHEME:", "")
+            dataSource.onAppAltered(packageName)
         }
     }
 

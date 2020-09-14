@@ -25,9 +25,13 @@ import com.ranhaveshush.launcher.minimalistic.viewmodel.NotificationViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.Notification
 import com.ranhaveshush.launcher.minimalistic.vo.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
+
+private const val MAX_RANDOM_NUMBER = 100
 
 @AndroidEntryPoint
-class NotificationFragment : Fragment(R.layout.fragment_notifications), NotificationItemClickListener, OnSwipedItemListener,
+class NotificationFragment : Fragment(R.layout.fragment_notifications), NotificationItemClickListener,
+    OnSwipedItemListener,
     ClearAllNotificationsClickListener {
     private val viewModel: NotificationViewModel by viewModels()
 
@@ -45,9 +49,12 @@ class NotificationFragment : Fragment(R.layout.fragment_notifications), Notifica
             val channelId = "test"
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val notificationChannel = NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_DEFAULT)
+                val notificationChannel =
+                    NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_DEFAULT)
                 notificationManager.createNotificationChannel(notificationChannel)
             }
+
+            val secondInMillis = TimeUnit.SECONDS.toMillis(1)
 
             val notification = NotificationCompat.Builder(context, channelId)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -58,10 +65,12 @@ class NotificationFragment : Fragment(R.layout.fragment_notifications), Notifica
                 .setColorized(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setWhen(System.currentTimeMillis())
-                .setTimeoutAfter(System.currentTimeMillis() + 10000)
+                .setTimeoutAfter(System.currentTimeMillis() + secondInMillis)
                 .build()
 
-            notificationManager.notify((Math.random() * 100).toInt(), notification)
+            // TODO: change random id logic to consistent id logic.
+            val randomId = (Math.random() * MAX_RANDOM_NUMBER).toInt()
+            notificationManager.notify(randomId, notification)
         }
 
         binding.recyclerViewNotifications.adapter = notificationsAdapter

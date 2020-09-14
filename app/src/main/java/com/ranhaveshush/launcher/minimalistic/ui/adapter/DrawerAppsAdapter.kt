@@ -24,7 +24,11 @@ class DrawerAppsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DrawerAppViewHolder =
         when (DrawerAppItem.Type.values()[viewType]) {
             DrawerAppItem.Type.HEADER -> DrawerAppHeaderViewHolder.create(parent)
-            DrawerAppItem.Type.ENTRY -> DrawerAppEntryViewHolder.create(parent, itemClickListener, itemLongClickListener)
+            DrawerAppItem.Type.ENTRY -> DrawerAppEntryViewHolder.create(
+                parent,
+                itemClickListener,
+                itemLongClickListener
+            )
         }
 
     override fun onBindViewHolder(holder: DrawerAppViewHolder, position: Int) = when (holder) {

@@ -17,14 +17,15 @@ import com.ranhaveshush.launcher.minimalistic.viewmodel.AppDrawerViewModel
 import com.ranhaveshush.launcher.minimalistic.vo.DrawerApp
 import com.ranhaveshush.launcher.minimalistic.vo.Resource.Status
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_app_drawer.*
+import kotlinx.android.synthetic.main.fragment_app_drawer.recyclerView_apps
 
 /**
  * This app drawer fragment represents the all apps screen,
  * a container for all installed apps.
  */
 @AndroidEntryPoint
-class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemClickListener, DrawerAppItemLongClickListener {
+class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemClickListener,
+    DrawerAppItemLongClickListener {
     private val viewModel: AppDrawerViewModel by viewModels()
 
     private val appsAdapter = DrawerAppsAdapter(this, this)

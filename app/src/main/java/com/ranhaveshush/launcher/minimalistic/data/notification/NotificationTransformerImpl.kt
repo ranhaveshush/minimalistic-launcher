@@ -20,7 +20,7 @@ class NotificationTransformerImpl @Inject constructor(
     override fun transform(data: StatusBarNotification): com.ranhaveshush.launcher.minimalistic.vo.Notification {
         val notification = data.notification
 
-        // TODO: 14/09/2020 handle a possible nullable value.
+        // TODO: handle a possible nullable value.
         val appInfo: ApplicationInfo = notification.extras.getParcelable("android.appInfo")!!
         val appLabel = appInfo.loadLabel(context.packageManager).toString()
         val appIconDrawable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -28,7 +28,10 @@ class NotificationTransformerImpl @Inject constructor(
         } else {
             appInfo.loadIcon(context.packageManager)
         }
-        val appIconBitmap = appIconDrawable.toBitmap(appIconDrawable.intrinsicWidth, appIconDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        val appIconBitmap = appIconDrawable.toBitmap(
+            appIconDrawable.intrinsicWidth, appIconDrawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
 
         val postedAt = notification.`when`
         val title = notification.extras.get(NotificationCompat.EXTRA_TITLE)?.toString() ?: ""
