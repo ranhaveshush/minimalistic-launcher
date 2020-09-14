@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class NotificationRepository @Inject constructor(
-    private val dataSource: NotificationDataSource,
-    private val dataTransformer: NotificationTransformer
+    private val dataSource: NotificationDataSource, private val dataTransformer: NotificationTransformer
 ) {
     fun getAllNotifications(): Flow<Resource<List<Notification>>> = dataSource.asFlow().map {
-        val notifications = it.map { sbn ->
+        val statusBarNotifications = it.toList()
+        val notifications = statusBarNotifications.map { sbn ->
             dataTransformer.transform(sbn)
         }.sortedByDescending { notificationItem ->
             notificationItem.postTime

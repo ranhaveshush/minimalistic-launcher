@@ -20,7 +20,6 @@ class NotificationTransformerImpl @Inject constructor(
     override fun transform(data: StatusBarNotification): com.ranhaveshush.launcher.minimalistic.vo.Notification {
         val notification = data.notification
 
-        // TODO: handle a possible nullable value.
         val appInfo: ApplicationInfo = notification.extras.getParcelable("android.appInfo")!!
         val appLabel = appInfo.loadLabel(context.packageManager).toString()
         val appIconDrawable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
