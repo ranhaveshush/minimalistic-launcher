@@ -2,4 +2,4 @@ apply from: "$rootDir/config/gradle/tools/lint.gradle"
 apply from: "$rootDir/config/gradle/tools/ktlint.gradle"
 apply from: "$rootDir/config/gradle/tools/detekt.gradle"
 
-check.dependsOn 'lint', 'ktlint', 'detekt'
+check.dependsOn 'lint', 'ktlintFormat', 'ktlint', 'detekt'
