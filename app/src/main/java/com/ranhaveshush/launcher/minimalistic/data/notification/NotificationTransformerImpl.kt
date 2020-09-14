@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
@@ -21,16 +22,18 @@ class NotificationTransformerImpl @Inject constructor(
         val notification = data.notification
 
         val appInfo: ApplicationInfo = notification.extras.getParcelable("android.appInfo")!!
-        val appLabel = appInfo.loadLabel(context.packageManager).toString()
-        val appIconDrawable = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val appIconDrawable: Drawable? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             notification.smallIcon.loadDrawable(context)
         } else {
             appInfo.loadIcon(context.packageManager)
         }
-        val appIconBitmap = appIconDrawable.toBitmap(
-            appIconDrawable.intrinsicWidth, appIconDrawable.intrinsicHeight,
+        val appIconBitmap: Bitmap? = appIconDrawable?.toBitmap(
+            appIconDrawable.intrinsicWidth,
+            appIconDrawable.intrinsicHeight,
             Bitmap.Config.ARGB_8888
         )
+        val appIcon = BitmapDrawable(context.resources, appIconBitmap)
+        val appLabel = appInfo.loadLabel(context.packageManager).toString()
 
         val postedAt = notification.`when`
         val title = notification.extras.get(NotificationCompat.EXTRA_TITLE)?.toString() ?: ""
@@ -41,7 +44,7 @@ class NotificationTransformerImpl @Inject constructor(
         return com.ranhaveshush.launcher.minimalistic.vo.Notification(
             data.key,
             data.packageName,
-            BitmapDrawable(context.resources, appIconBitmap),
+            appIcon,
             appLabel,
             NotificationTime(postedAt),
             title,
