@@ -28,7 +28,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
     private val appsAdapter = HomeAppsAdapter(this, this)
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater)

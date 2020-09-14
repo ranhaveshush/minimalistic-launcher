@@ -63,7 +63,6 @@ class DrawerAppItemDiffCallback : DiffUtil.ItemCallback<DrawerAppItem>() {
         override fun areItemsTheSame(oldItem: DrawerApp, newItem: DrawerApp): Boolean = oldItem.label == newItem.label
 
         override fun areContentsTheSame(oldItem: DrawerApp, newItem: DrawerApp): Boolean =
-            oldItem.packageName == newItem.packageName
-                && oldItem.activityName == newItem.activityName
+            oldItem.packageName == newItem.packageName && oldItem.activityName == newItem.activityName
     }
 }

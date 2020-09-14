@@ -53,6 +53,6 @@ class HomeAppItemDiffCallback : DiffUtil.ItemCallback<HomeApp>() {
 
     override fun areItemsTheSame(oldItem: HomeApp, newItem: HomeApp) = oldItem.label == newItem.label
 
-    override fun areContentsTheSame(oldItem: HomeApp, newItem: HomeApp) = oldItem.packageName == newItem.packageName
-        && oldItem.activityName == newItem.activityName
+    override fun areContentsTheSame(oldItem: HomeApp, newItem: HomeApp) =
+        oldItem.packageName == newItem.packageName && oldItem.activityName == newItem.activityName
 }

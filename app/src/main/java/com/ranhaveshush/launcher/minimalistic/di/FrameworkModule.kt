@@ -21,4 +21,3 @@ class FrameworkModule {
         @ApplicationContext context: Context
     ): PackageManager = context.packageManager
 }
-

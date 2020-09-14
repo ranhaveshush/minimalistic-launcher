@@ -20,8 +20,9 @@ class HomeRepository @Inject constructor(
 
         val systemApps = resolveInfos.filter { resolveInfo ->
             val applicationInfo = resolveInfo.activityInfo.applicationInfo
-            applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0
-                && applicationInfo.packageName.contains(appNamesFilter)
+            applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0 && applicationInfo.packageName.contains(
+                appNamesFilter
+            )
         }
 
         val apps = systemApps.map { resolveInfo ->
