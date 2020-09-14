@@ -7,17 +7,18 @@ detekt {
             "src/test/java",
             "src/androidTest/java"
     )
-    filters = ".*/resources/.*,.*/build/.*"
-    buildUponDefaultConfig = false
-    config = files("$project.rootDir/config/detekt/detekt-config.yml")
-    baseline = file("$project.rootDir/config/detekt/detekt-baseline.xml")
+//    config = files("$rootDir/config/detekt/detekt-config.yml")
+//    baseline = file("$rootDir/config/detekt/detekt-baseline.xml")
     reports {
         xml {
             enabled = false
         }
+        txt {
+            enabled = false
+        }
         html {
             enabled = true
-            destination = file("$project.buildDir/reports/detekt/detekt-results.html")
+            destination = file("$buildDir/reports/detekt/detekt-results.html")
         }
     }
 }
