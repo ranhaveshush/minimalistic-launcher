@@ -43,7 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
             viewModel.launchWallpaperChooser(application)
         }
 
-        viewModel.apps.observe(viewLifecycleOwner, Observer {
+        viewModel.apps.observe(viewLifecycleOwner, {
             if (it.state.status == Resource.Status.SUCCESS) {
                 appsAdapter.submitList(it.data)
             }
