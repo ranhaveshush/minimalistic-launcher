@@ -9,7 +9,8 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class NotificationRepository @Inject constructor(
-    private val dataSource: NotificationDataSource, private val dataTransformer: NotificationTransformer
+    private val dataSource: NotificationDataSource,
+    private val dataTransformer: NotificationTransformer
 ) {
     fun getAllNotifications(): Flow<Resource<List<Notification>>> = dataSource.asFlow().map {
         val statusBarNotifications = it.toList()

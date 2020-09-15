@@ -18,7 +18,8 @@ class NotificationDataSourceImpl @Inject constructor(
     override fun asFlow(): Flow<Collection<StatusBarNotification>> = channel.asFlow()
 
     override suspend fun add(sbn: StatusBarNotification) {
-        cache[sbn.key] = sbn
+        val key = generateKey(sbn)
+        cache[key] = sbn
         updateChannel()
     }
 
@@ -38,5 +39,13 @@ class NotificationDataSourceImpl @Inject constructor(
 
     private suspend fun updateChannel() {
         channel.send(cache.values)
+    }
+
+    private fun generateKey(sbn: StatusBarNotification): String {
+        var key = "${sbn.packageName}|${sbn.id}"
+        if (!sbn.tag.isNullOrEmpty()) {
+            key += "|${sbn.tag}"
+        }
+        return key
     }
 }

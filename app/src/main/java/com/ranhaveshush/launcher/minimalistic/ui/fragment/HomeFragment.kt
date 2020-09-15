@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.ranhaveshush.launcher.minimalistic.R
 import com.ranhaveshush.launcher.minimalistic.databinding.FragmentHomeBinding
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.HomeAppsAdapter

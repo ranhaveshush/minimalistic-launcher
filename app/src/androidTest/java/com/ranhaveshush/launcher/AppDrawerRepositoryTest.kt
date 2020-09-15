@@ -24,7 +24,6 @@ class AppDrawerRepositoryTest {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val packageManager = instrumentation.context.packageManager
 
-        // TODO: replace InjectorUtils with Hilt.
 //        repository = InjectorUtils.provideAppDrawerRepository(packageManager)
     }
 
