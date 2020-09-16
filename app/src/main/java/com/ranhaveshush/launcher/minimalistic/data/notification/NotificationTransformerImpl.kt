@@ -9,6 +9,7 @@ import android.os.Build
 import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.drawable.toBitmap
+import com.ranhaveshush.launcher.minimalistic.ktx.simpleKey
 import com.ranhaveshush.launcher.minimalistic.vo.NotificationTime
 import javax.inject.Inject
 
@@ -42,7 +43,7 @@ class NotificationTransformerImpl @Inject constructor(
         val deleteIntent = notification.deleteIntent
 
         return com.ranhaveshush.launcher.minimalistic.vo.Notification(
-            data.key,
+            data.simpleKey,
             data.packageName,
             appIcon,
             appLabel,

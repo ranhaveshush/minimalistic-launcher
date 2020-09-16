@@ -1,6 +1,7 @@
 package com.ranhaveshush.launcher.minimalistic.data.notification
 
 import android.service.notification.StatusBarNotification
+import com.ranhaveshush.launcher.minimalistic.ktx.simpleKey
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -18,7 +19,7 @@ class NotificationDataSourceImpl @Inject constructor(
     override fun asFlow(): Flow<Collection<StatusBarNotification>> = channel.asFlow()
 
     override suspend fun add(sbn: StatusBarNotification) {
-        val key = generateKey(sbn)
+        val key = sbn.simpleKey
         cache[key] = sbn
         updateChannel()
     }
@@ -39,13 +40,5 @@ class NotificationDataSourceImpl @Inject constructor(
 
     private suspend fun updateChannel() {
         channel.send(cache.values)
-    }
-
-    private fun generateKey(sbn: StatusBarNotification): String {
-        var key = "${sbn.packageName}|${sbn.id}"
-        if (!sbn.tag.isNullOrEmpty()) {
-            key += "|${sbn.tag}"
-        }
-        return key
     }
 }
