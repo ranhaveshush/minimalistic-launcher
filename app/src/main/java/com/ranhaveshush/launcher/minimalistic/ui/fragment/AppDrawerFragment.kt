@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ranhaveshush.launcher.minimalistic.R
 import com.ranhaveshush.launcher.minimalistic.databinding.FragmentAppDrawerBinding
+import com.ranhaveshush.launcher.minimalistic.ktx.hideKeyboard
 import com.ranhaveshush.launcher.minimalistic.ui.adapter.DrawerAppsAdapter
 import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemClickListener
 import com.ranhaveshush.launcher.minimalistic.ui.listener.DrawerAppItemLongClickListener
@@ -61,6 +62,8 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
     override fun onAppClick(app: DrawerApp) {
         viewModel.launchApp(application, app)
         viewModel.clearSearchQuery()
+
+        requireContext().hideKeyboard(view)
     }
 
     override fun onAppLongClick(app: DrawerApp): Boolean {
