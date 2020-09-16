@@ -33,10 +33,16 @@ class NotificationService : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
         sbn?.let {
-            serviceScope.launch {
-                dataSource.add(sbn)
-                cancelNotification(sbn.key)
+            if (shouldInclude(sbn)) {
+                serviceScope.launch {
+                    dataSource.add(sbn)
+                    cancelNotification(sbn.key)
+                }
             }
         }
+    }
+
+    private fun shouldInclude(sbn: StatusBarNotification): Boolean {
+        return !sbn.isOngoing && sbn.isClearable
     }
 }
