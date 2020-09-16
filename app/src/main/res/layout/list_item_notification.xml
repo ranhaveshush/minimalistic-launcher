@@ -52,9 +52,10 @@
 
         <TextView
                 android:id="@+id/textView_notificationTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_medium"
+                android:maxLines="1"
                 android:text="@{notification.title}"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textStyle="bold"
@@ -67,9 +68,10 @@
 
         <TextView
                 android:id="@+id/textView_notificationText"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_small"
+                android:maxLines="3"
                 android:text="@{notification.text}"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="?android:attr/textColorSecondary"
@@ -78,7 +80,7 @@
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="@+id/textView_appLabel"
                 app:layout_constraintTop_toBottomOf="@+id/textView_notificationTitle"
-                tools:text="@tools:sample/lorem" />
+                tools:text="@tools:sample/lorem/random" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
