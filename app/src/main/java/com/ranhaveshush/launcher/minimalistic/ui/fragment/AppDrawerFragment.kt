@@ -45,18 +45,20 @@ class AppDrawerFragment : Fragment(R.layout.fragment_app_drawer), DrawerAppItemC
             stackFromEnd = true
         }
 
-        return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-
         viewModel.apps.observe(viewLifecycleOwner, {
             if (it.state.status == Status.SUCCESS) {
                 appsAdapter.submitList(it.data)
                 recyclerView_apps.smoothScrollToPosition(0)
             }
         })
+
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.clearSearchQuery()
     }
 
     override fun onAppClick(app: DrawerApp) {
