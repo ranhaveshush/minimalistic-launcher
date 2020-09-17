@@ -9,27 +9,18 @@ import android.graphics.drawable.Drawable
 data class Notification(
     val key: String,
     val packageName: String,
+    val postTime: Long,
     val appIcon: Drawable,
     val appLabel: String,
-    val postTime: NotificationTime,
     val title: String,
     val text: String,
     val contentIntent: PendingIntent?,
     val deleteIntent: PendingIntent?
-) : ValueObject
-
-/**
- * A notification time representation.
- */
-data class NotificationTime(private val time: Long) : Comparable<NotificationTime> {
-    val value: String
-        get() = toString()
-
+) : ValueObject {
     @Suppress("MagicNumber", "ReturnCount")
-    override fun toString(): String {
-        val passedTime = System.currentTimeMillis() - time
-        val seconds = passedTime / 1000
-        if (seconds == 0L) return "${passedTime}ms"
+    fun getElapsedTime(): String {
+        val elapsedTime = System.currentTimeMillis() - postTime
+        val seconds = elapsedTime / 1000
         val minutes = seconds / 60
         if (minutes == 0L) return "${seconds}s"
         val hours = minutes / 60
@@ -41,6 +32,4 @@ data class NotificationTime(private val time: Long) : Comparable<NotificationTim
         val months = weeks / 4
         return if (months == 0L) "${weeks}w" else "ages"
     }
-
-    override fun compareTo(other: NotificationTime): Int = time.compareTo(other.time)
 }

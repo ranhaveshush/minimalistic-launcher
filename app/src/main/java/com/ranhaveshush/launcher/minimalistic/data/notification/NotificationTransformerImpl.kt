@@ -10,7 +10,7 @@ import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.ranhaveshush.launcher.minimalistic.ktx.simpleKey
-import com.ranhaveshush.launcher.minimalistic.vo.NotificationTime
+import com.ranhaveshush.launcher.minimalistic.vo.Notification
 import javax.inject.Inject
 
 /**
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class NotificationTransformerImpl @Inject constructor(
     private val context: Context
 ) : NotificationTransformer {
-    override fun transform(data: StatusBarNotification): com.ranhaveshush.launcher.minimalistic.vo.Notification {
+    override fun transform(data: StatusBarNotification): Notification {
         val notification = data.notification
 
         val appInfo: ApplicationInfo = notification.extras.getParcelable("android.appInfo")!!
@@ -36,18 +36,18 @@ class NotificationTransformerImpl @Inject constructor(
         val appIcon = BitmapDrawable(context.resources, appIconBitmap)
         val appLabel = appInfo.loadLabel(context.packageManager).toString()
 
-        val postedAt = notification.`when`
+        val postTime = notification.`when`
         val title = notification.extras.get(NotificationCompat.EXTRA_TITLE)?.toString() ?: ""
         val text = notification.extras.get(NotificationCompat.EXTRA_TEXT)?.toString() ?: ""
         val contentIntent = notification.contentIntent
         val deleteIntent = notification.deleteIntent
 
-        return com.ranhaveshush.launcher.minimalistic.vo.Notification(
+        return Notification(
             data.simpleKey,
             data.packageName,
+            postTime,
             appIcon,
             appLabel,
-            NotificationTime(postedAt),
             title,
             text,
             contentIntent,

@@ -16,10 +16,9 @@ class NotificationRepository @Inject constructor(
         val statusBarNotifications = it.toList()
         val notifications = statusBarNotifications.map { sbn ->
             dataTransformer.transform(sbn)
-        }.sortedByDescending { notificationItem ->
-            notificationItem.postTime
+        }.sortedByDescending { notification ->
+            notification.postTime
         }
-
         Resource.success(notifications)
     }
 

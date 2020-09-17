@@ -43,6 +43,7 @@ class NotificationFragment : Fragment(R.layout.fragment_notifications), Notifica
         }
 
         binding.recyclerViewNotifications.adapter = notificationsAdapter
+        binding.recyclerViewNotifications.itemAnimator = null
 
         val itemTouchHelper = ItemTouchHelper(SwipedItemTouchCallback(ItemTouchHelper.END, this))
         itemTouchHelper.attachToRecyclerView(binding.recyclerViewNotifications)
@@ -55,7 +56,8 @@ class NotificationFragment : Fragment(R.layout.fragment_notifications), Notifica
 
         viewModel.notifications.observe(viewLifecycleOwner, {
             if (it.state.status == Resource.Status.SUCCESS) {
-                notificationsAdapter.submitList(it.data)
+                val newList = it.data?.toList()
+                notificationsAdapter.submitList(newList)
             }
         })
     }
