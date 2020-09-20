@@ -21,12 +21,15 @@ class AppPackageAlteredReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if (context == null) return
         if (intent == null) return
-        if (!intent.action.isNullOrEmpty()) return
-        if (actions.contains(intent.action)) return
+        if (intent.action.isNullOrEmpty()) return
+        if (!actions.contains(intent.action)) return
 
         intent.dataString?.let { data ->
             val packageName = data.replace("$PACKAGE_SCHEME:", "")
-            dataSource.onAppAltered(packageName)
+            when (intent.action) {
+                Intent.ACTION_PACKAGE_ADDED -> dataSource.onAppAdded(packageName)
+                Intent.ACTION_PACKAGE_REMOVED -> dataSource.onAppRemoved(packageName)
+            }
         }
     }
 

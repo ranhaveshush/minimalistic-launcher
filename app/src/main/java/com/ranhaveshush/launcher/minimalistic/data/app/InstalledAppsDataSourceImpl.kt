@@ -25,8 +25,13 @@ class InstalledAppsDataSourceImpl @Inject constructor(
 
     override fun asFlow(): Flow<Collection<ResolveInfo>> = channel.asFlow()
 
-    override fun onAppAltered(packageName: String) {
+    override fun onAppAdded(packageName: String) {
         refresh()
+        updateChannel()
+    }
+
+    override fun onAppRemoved(packageName: String) {
+        cache.remove(packageName)
         updateChannel()
     }
 

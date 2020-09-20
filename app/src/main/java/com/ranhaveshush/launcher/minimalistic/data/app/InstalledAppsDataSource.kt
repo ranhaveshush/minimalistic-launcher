@@ -8,5 +8,6 @@ import kotlinx.coroutines.flow.Flow
  */
 interface InstalledAppsDataSource {
     fun asFlow(): Flow<Collection<ResolveInfo>>
-    fun onAppAltered(packageName: String)
+    fun onAppAdded(packageName: String)
+    fun onAppRemoved(packageName: String)
 }
