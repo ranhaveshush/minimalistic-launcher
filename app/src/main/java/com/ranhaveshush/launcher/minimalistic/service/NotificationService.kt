@@ -3,6 +3,7 @@ package com.ranhaveshush.launcher.minimalistic.service
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import com.ranhaveshush.launcher.minimalistic.data.notification.NotificationDataSource
+import com.ranhaveshush.launcher.minimalistic.notification.ExcludedApps
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +16,9 @@ import javax.inject.Inject
 class NotificationService : NotificationListenerService() {
     @Inject
     lateinit var dataSource: NotificationDataSource
+
+    @Inject
+    lateinit var excludedApps: ExcludedApps
 
     private lateinit var serviceScope: CoroutineScope
 
@@ -36,13 +40,13 @@ class NotificationService : NotificationListenerService() {
             if (shouldInclude(sbn)) {
                 serviceScope.launch {
                     dataSource.add(sbn)
-                    cancelNotification(sbn.key)
+//                    cancelNotification(sbn.key)
                 }
             }
         }
     }
 
     private fun shouldInclude(sbn: StatusBarNotification): Boolean {
-        return !sbn.isOngoing && sbn.isClearable
+        return !sbn.isOngoing && sbn.isClearable && !excludedApps.isExcluded(sbn.packageName)
     }
 }
