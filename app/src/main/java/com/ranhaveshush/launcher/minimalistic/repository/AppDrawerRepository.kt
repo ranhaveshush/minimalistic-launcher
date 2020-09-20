@@ -13,7 +13,7 @@ class AppDrawerRepository @Inject constructor(
     private val dataTransformer: DrawerAppTransformer
 ) {
     fun listApps(filter: String = ""): Flow<Resource<List<DrawerApp>>> = dataSource.asFlow().map { resolveInfos ->
-        val apps = resolveInfos.map { resolveInfo ->
+        val apps = resolveInfos.toList().map { resolveInfo ->
             dataTransformer.transform(resolveInfo)
         }
 
