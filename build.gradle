@@ -1,9 +1,9 @@
 buildscript {
     // Build script plugins
-    ext.version_android_gradle = '4.0.1'
-    ext.version_kotlin = '1.4.10'
+    ext.version_android_gradle = '4.1.2'
+    ext.version_kotlin = '1.4.31'
     ext.version_detekt = '1.13.1'
-    ext.version_hilt = '2.29.1-alpha'
+    ext.version_hilt = '2.33-beta'
     ext.version_navigation = '2.3.0-alpha04'
     ext.version_google_services = '4.3.3'
     ext.version_firebase_crashlytics = '2.0.0'
@@ -35,31 +35,31 @@ allprojects {
     ext.version_compile_sdk = 30
 
     // DI
-    ext.version_hilt_lifecycle_viewmodel = '1.0.0-alpha02'
+    ext.version_hilt_lifecycle_viewmodel = '1.0.0-alpha03'
 
     // Test
     ext.version_ext_junit = '1.1.2'
-    ext.version_junit = '4.13'
+    ext.version_junit = '4.13.2'
     ext.version_runner = '1.3.0'
     ext.version_espresso_core = '3.3.0'
 
     // Kotlin
     ext.version_ktlint = '0.32.0'
-    ext.version_core_ktx = '1.5.0-alpha02'
+    ext.version_core_ktx = '1.5.0-beta02'
     ext.version_kotlinx_coroutines = '1.2.1'
 
     // AndroidX
     ext.version_legacy = '1.0.0'
-    ext.version_appcompat = '1.3.0-alpha02'
-    ext.version_constraintlayout = '2.0.1'
+    ext.version_appcompat = '1.3.0-beta01'
+    ext.version_constraintlayout = '2.0.4'
     ext.version_viewpager2 = '1.0.0'
-    ext.version_lifecycle = '2.2.0'
-    ext.version_navigation = '2.3.0'
-    ext.version_room = '2.3.0-alpha02'
+    ext.version_lifecycle = '2.3.0'
+    ext.version_navigation = '2.3.3'
+    ext.version_room = '2.3.0-beta02'
 
     // Firebase
-    ext.version_firebase_analytics = '17.5.0'
-    ext.version_firebase_crashlytics = '17.2.1'
+    ext.version_firebase_analytics = '18.0.2'
+    ext.version_firebase_crashlytics = '17.3.1'
 
     // Retrofit
     ext.version_retrofit = '2.9.0'

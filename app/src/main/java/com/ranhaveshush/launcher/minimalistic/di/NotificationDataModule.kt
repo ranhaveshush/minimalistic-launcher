@@ -7,13 +7,13 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import java.util.Collections
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 class NotificationDataModule {
     @Provides
     fun provideNotificationCache(): MutableMap<String, StatusBarNotification> {
@@ -26,7 +26,7 @@ class NotificationDataModule {
     }
 
     @Module
-    @InstallIn(ApplicationComponent::class)
+    @InstallIn(SingletonComponent::class)
     abstract class NotificationDataSourceModule {
         @Binds
         abstract fun bindNotificationDataSource(
