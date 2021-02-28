@@ -30,7 +30,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), HomeAppItemClickListener,
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentHomeBinding.inflate(inflater)
 
         binding.lifecycleOwner = viewLifecycleOwner
